@@ -108,18 +108,22 @@ SESSION_CONFIG_DEFAULTS = {
     'mturk_hit_settings': mturk_hit_settings,
 }
 
-
-SESSION_CONFIGS = [
-    {
-        'name': 'my_experiment',
-        'display_name': 'My Experiment',
-        'num_demo_participants': 24,
-        'app_sequence': ['payoff_matrix',  # part 1
-                         'coin_toss', 'decisor_receptor', 'two_thirds',  # part 2
-                         'personality_test', 'conventional_wisdom_test', 'iq_test',  # part 3
-                         'demographics']
-    }
-]
+SESSION_CONFIGS = []
+for high_payment in [False, True]:
+    for social_cues in [False, True]:
+        SESSION_CONFIGS.append({
+            'name': 'my_experiment_%d_%d' % (high_payment, social_cues),
+            'display_name': 'My Experiment: %s payment, %s cues'
+                            % ("high" if high_payment else "normal",
+                               "with social" if social_cues else "without"),
+            'num_demo_participants': 2,
+            'app_sequence': ['payoff_matrix',  # part 1
+                   'coin_toss', 'decisor_receptor', 'two_thirds',  # part 2
+                   'personality_test', 'conventional_wisdom_test', 'iq_test',  # part 3
+                   'demographics'],
+            'high_payment': high_payment,
+            'social_cues': social_cues
+        })
 
 # anything you put after the below line will override
 # oTree's default settings. Use with caution.
