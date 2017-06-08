@@ -17,3 +17,6 @@ RUNNING IT
     $ otree resetdb
     $ otree runserver
 
+or
+
+    $ OTREE_PRODUCTION=1 otree runserver 0.0.0.0:8000
