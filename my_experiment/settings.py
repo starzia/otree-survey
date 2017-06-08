@@ -116,7 +116,8 @@ SESSION_CONFIGS = [
         'num_demo_participants': 24,
         'app_sequence': ['payoff_matrix',  # part 1
                          'coin_toss', 'decisor_receptor', 'two_thirds',  # part 2
-                         'personality_test', 'conventional_wisdom_test', 'iq_test']  # part 3
+                         'personality_test', 'conventional_wisdom_test', 'iq_test',  # part 3
+                         'demographics']
     }
 ]
 
