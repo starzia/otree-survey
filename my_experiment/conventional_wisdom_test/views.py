@@ -21,6 +21,5 @@ class Results(Page):
 
 
 page_sequence = [
-    Question,
-    Results
+    Question
 ]
