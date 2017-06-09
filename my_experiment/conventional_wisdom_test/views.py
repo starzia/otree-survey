@@ -4,14 +4,16 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class MyPage(Page):
-    pass
+class Question(Page):
+    form_model = models.Player
+    form_fields = ['submitted_answer']
 
-
-class ResultsWaitPage(WaitPage):
-
-    def after_all_players_arrive(self):
-        pass
+    def submitted_answer_choices(self):
+        qd = self.player.current_question()
+        return [
+            qd['a'][0],
+            qd['a'][1]
+        ]
 
 
 class Results(Page):
@@ -19,7 +21,6 @@ class Results(Page):
 
 
 page_sequence = [
-    MyPage,
-    ResultsWaitPage,
+    Question,
     Results
 ]
