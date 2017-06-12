@@ -5,7 +5,28 @@
     Page title
 {% endblock %}
 
+{% block styles %}
+    <link href="{% static "payoff_matrix/style.css" %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
+
+<div class="center">
+    <table>
+        <tr>
+            <td></td><td></td><td colspan="2">Other Participant</td>
+        </tr>
+        <tr>
+            <td></td><td></td><td>{{subsession.choices.0}}</td><td>{{subsession.choices.1}}</td>
+        </tr>
+        <tr>
+            <td>You</td><td>{{subsession.choices.0}}︎</td><td class="border">1, 2</td><td class="border">3, 4</td>
+        </tr>
+        <tr>
+            <td></td><td>{{subsession.choices.1}}</td><td class="border">5, 6</td><td class="border">7, 8</td>
+        </tr>
+    </table>
+</div>
 
     {% next_button %}
 {% endblock %}
