@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+
+<p>The experiment is about to begin. From now on you are not allowed to talk or to look around.
+    Please switch off your cell phones. If you have any questions, please raise your hand and
+    one of the experimenter will assist you.</p>
+
+<p>This is an experiment on decision making. You will get at least $35 for participating.
+    Furthermore, if you follow the instructions carefully, you can earn more money.
+    The money you can earn will depend on your decisions, on the decisions of other participants
+    in this session as well as on luck. The final payment will be the fixed amount of $35 plus
+    the money you earn during the experiment.</p>
+
+<p>The experiment has three parts.  At the beginning of each part we will read the detailed
+    instructions on which types of decisions you can make and how your decisions will be related
+    to the money you can earn.</p>
+
+    {% next_button %}
+
+{% endblock %}

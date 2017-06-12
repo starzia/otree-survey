@@ -1,6 +1,7 @@
 venv
 *.pyc
 staticfiles
+_static_root/
 ./db.sqlite3
 .idea
 *~

@@ -1,0 +1,59 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Example
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static "payoff_matrix/style.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<p>In this part of the experiment you will be presented with payoff matrices such as the one shown below:</p>
+
+<div class="center">
+    <table>
+        <tr>
+            <td></td><td></td><td colspan="2">Other Participant</td>
+        </tr>
+        <tr>
+            <td></td><td></td><td>■︎</td><td>●</td>
+        </tr>
+        <tr>
+            <td>You</td><td>■︎</td><td class="border">1, 2</td><td class="border">3, 4</td>
+        </tr>
+        <tr>
+            <td></td><td>●</td><td class="border">5, 6</td><td class="border">7, 8</td>
+        </tr>
+    </table>
+</div>
+
+<p>In this particular matrix, you and another participant can choose between two options, ■︎︎︎ and ●, such that your money
+will depend on your choice as well as on the choice of the other participant. If you both choose ■︎ then you will
+earn $1 and the other participant will earn $2. If you choose ■︎ and the other participant chooses ●, then you will
+earn $3 and the other participant will earn $4. If you choose ● and the other participant chooses ■︎, then you will
+earn $5 and the other participant will earn $6. Finally, if you both choose ● then you will earn $7 and the other
+    participant will get $8.</p>
+
+<p>This is just an example for you to learn how to read a matrix. Are there any questions?</p>
+
+<p>You will be presented with 5 different matrices and in each of them you will have to choose between two options.
+    The numbers and therefore the money you can earn will change from matrix to matrix, and the matrices will be
+    different from the example above. All of you will be making decisions for the same 5 matrices. For each matrix,
+    you will be matched with another participant. You will not know the identity of this person and the other person
+    will not know your identity either. The matching between participants is done at random. You will not know the
+    other participants' choices until the end of the experiment.</p>
+
+<p>We will not pay you for all the 5 matrices but for one unique matrix. At the end of the experiment, one matrix will
+    be randomly chosen, and the money you earn will be determined by your choice and your matched participant's choice
+    in the randomly chosen matrix. At the end of the experiment, we will show you which matrix has been chosen, we will
+    remind you about your choice in that particular matrix, and we will also show you your matched participant's choice
+    in that particular matrix, so that you know how much you have earned in this part of the experiment.</p>
+
+<p>If everything is clear then we will start with the first part of the experiment.</p>
+
+    {% next_button %}
+
+{% endblock %}

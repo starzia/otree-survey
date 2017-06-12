@@ -1,0 +1,1584 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{natbib}
+\usepackage{bm}
+\usepackage{epic}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[colorlinks]{hyperref}
+\usepackage{mathtools}
+\usepackage{amscd}
+\usepackage{titling}
+\usepackage[extra]{tipa}
+\usepackage{nicefrac}
+\usepackage{MnSymbol}
+%\usepackage{mdframed}
+\usepackage{tcolorbox}
+
+\hypersetup{
+    citecolor=blue,
+    bookmarksnumbered=true,
+    linkcolor=blue,
+}
+\setlength{\textwidth}{16.9cm} \setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt} \setlength{\topmargin}{-40pt}
+\setlength{\textheight}{22.4cm}
+
+\begin{document}
+
+\section{Overview}
+
+The design of the experiment is given in Figure \ref{fig:design}. The experiment has a $(2 \times 2)$-design: a treatment either has regular payments or high payments and social cues or no social cues. A treatment consists of multiple sessions. A session $s$ is characterized by the number $n_s$ of subjects that participate in the session as well as a treatment variable $T_s$. Since every treatment is characterized by a ``payment'' and a ``social cues'' variable, the treatment variable for a session $s$ can be represented by a pair $T_s=(T_s^1,T_s^2)$, where each $T_s^\ell$, $\ell=1,2$, takes values in $\{0,1\}$. Throughout this document, we will use the following notation:
+\begin{itemize}
+\item if $T_s^1=1$, then session $s$ has high payments;
+\item if $T_s^1=0$, then session $s$ has regular payments;
+\item if $T_s^2=1$, then session $s$ has social cues;
+\item if $T_s^2=0$, then session $s$ has no social cues.
+\end{itemize}
+To illustrate, if $T_s=(0,1)$, then session $s$ has regular payments and social cues. Below we specify the different treatments.
+
+
+In a given session $s$, each subject is assigned an ID (a number). For each subject, the ID is displayed on the subject's screen (e.g., ID=1234) so that a subject knows his/her ID. Each subject is also assigned a role $r$, which is either `row' or `column'. The subject is not informed of his role.
+
+For each session $s$, the program should record the following:
+\begin{itemize}
+\item treatment variable $T_s=(T_s^1,T_s^2)$;
+\item for each subject in the session, his/her role;
+\item for each subject in the session, his/her choices in each of the tasks and games (see below);
+\item the game/outcomes selected for payments (see below) as well as the matches selected (see below).
+\end{itemize}
+At the end of the experiment, the program calculates the total earnings in the experiment for each subject and gives as an output (to the experimenter) a list of ID-earnings pairs so that the experimenter can pay the subjects. All other information (treatment variable, subjects' roles, choices, selected games/outcomes and matches) should be written to a spreadsheet (preferably in xls or csv format).
+
+
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{lcc}
+& No Social Cues & Social Cues  \\ \cline{2-3}
+Regular payment & \multicolumn{1}{|c|}{25 subjects} & \multicolumn{1}{c|}{25 subjects}  \\ \cline{2-3}
+High payment & \multicolumn{1}{|c|}{50 subjects} & \multicolumn{1}{c|}{50 subjects}  \\ \cline{2-3}
+\end{tabular}
+\end{center}
+\caption{Treatment using Between-Subject Design} \label{fig:design}
+\end{figure}
+
+\section{Experiment}
+
+We describe the experiment from the perspective of a given session $s$. As noted above, a session is characterized by its treatment variable $T_s=(T_s^1,T_s^2)$ and the number $n_s$ of subjects who participate in $s$. Subjects are labeled by $i=1,\ldots, n_s$.
+
+\paragraph{Screen 1} The first screen subjects see is a welcome message. If $T_s^1=1$ (high payments), then subjects see the following message:
+
+\begin{tcolorbox}
+The experiment is about to begin. From now on it is not allowed to talk or to look around. Please switch off your cell phones. If you have any questions, please raise your hand and one of the experimenter will assist you.\\
+
+This is an experiment on decision making. You will get a fixed amount of \$35 for participating. Furthermore, if you follow the instructions carefully, you can earn more money. The money you can earn will depend on your decisions, on the decisions of other participants in this session as well as on luck. The final payment will be the fixed amount of \$35 plus the money you earn during the experiment.\\
+
+The experiment consists of three different parts.  At the beginning of each part we will read the detailed instructions on which types of decisions you can take and how your decisions will be related to the money you can earn.
+\end{tcolorbox}
+
+If $T_s^1=0$ (regular payments), then subjects see the following message:
+
+\begin{tcolorbox}
+The experiment is about to begin. From now on it is not allowed to talk or to look around. Please switch off your cell phones. If you have any questions, please raise your hand and one of the experimenter will assist you.\\
+
+This is an experiment on decision making. You will get a fixed amount of \$20 for participating. Furthermore, if you follow the instructions carefully, you can earn more money. The money you can earn will depend on your decisions, on the decisions of other participants in this session as well as on luck. The final payment will be the fixed amount of \$20 plus the money you earn during the experiment.\\
+
+The experiment consists of three different parts.  At the beginning of each part we will read the detailed instructions on which types of decisions you can take and how your decisions will be related to the money you can earn.
+\end{tcolorbox}
+
+
+\subsection{Part 1}
+
+In part 1 of the experiment, subjects play 5 games. Each game has 2 players and 2 actions. At the end of part 1, a game is selected uniformly at random, and subjects are matched in pairs, with each matching chosen uniformly at random. That is, if the games are labeled by $g_1,\dots,g_5$, then the probability that game $g_\ell$, $\ell=1,2,3,4,5$, is selected is $\tfrac{1}{5}$. 
+
+For this part of the experiment, each subject $i$ in the session should be assigned a role $r_i=\text{row},\text{column}$. Half of the subjects in the session are assigned to role ``row,'' and the other half are assigned to role ``column.'' (If there is an odd number $n$ of players, then one role has one player more than the other role.) At the end of the experiment, each subject in the session is matched uniformly at random with a subject in the same session who has the other role (so a ``row'' subject is matched with a ``column'' subject and vice versa).
+
+For sessions with social cues (i.e., $T_s^2=1$), subjects first need to answer a question before the matrix appears and they can choose an action in the game (see explanation on screen 2 for more details). (The question should remain visible after the matrix has appeared.)
+
+
+\paragraph{Screen 2} This screen explains the experiment. There are two versions, depending on $T_s^2$. If $T_s^2=0$ (no social cues), then subjects see the following message:
+
+
+
+\begin{tcolorbox}
+In this part of the experiment you will be presented with payoff matrices such as the one shown below:
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}\\
+    & & \multicolumn{2}{c}{Other Participant}  \\
+    & & $\largesquare$ & \textbigcircle  \\ \cline{3-4}
+You & $\largesquare$ & \multicolumn{1}{|c|}{$1,2$} & \multicolumn{1}{c|}{$3,4$}  \\ \cline{3-4}
+    & \textbigcircle & \multicolumn{1}{|c|}{$5,6$} & \multicolumn{1}{c|}{$7,8$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+In this particular matrix, you and another participant can choose between two options, $\largesquare$ and \textbigcircle, such that your money will depend on your choice as well as on the choice of the other participant. If you both choose $\largesquare$ then you will earn \$1 and the other participant will earn \$2. If you choose $\largesquare$ and the other participant chooses \textbigcircle, then you will earn \$3 and the other participant will earn \$4. If you choose \textbigcircle and the other participant chooses $\largesquare$, then you will earn \$5 and the other participant will earn \$6. Finally, if you both choose \textbigcircle then you will earn \$7 and the other participant will get \$8.\\
+
+This is just an example for you to learn how to read a matrix. Are there any questions?\\
+
+You will be presented with 5 different matrices and in each of them you will have to choose between two options, $\largesquare$ and \textbigcircle. The numbers and therefore the money you can earn will change from matrix to matrix, and the matrices will be different from the example above. All of you will be making decisions for the same 5 matrices. For each matrix, you will be matched with another participant. You will not know the identity of this person and the other person will not know your identity either. The matching between participants is done at random. You will not know the other participants' choices until the end of the experiment.\\
+
+We will not pay you for all the 5 matrices but for one unique matrix. At the end of the experiment, one matrix will be randomly chosen, and the money you earn will be determined by your choice and your matched participant's choice in the randomly chosen matrix. At the end of the experiment, we will show you which matrix has been chosen, we will remind you about your choice in that particular matrix, and we will also show you your matched participant's choice in that particular matrix, so that you know how much you have earned in this part of the experiment.\\
+
+If everything is clear then we will start with the first part of the experiment.
+\end{tcolorbox}
+
+If $T_s^2=1$ (social cues), then subjects see the following message:
+
+\begin{tcolorbox}
+In this part of the experiment you will be presented with payoff matrices such as the one shown below:
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+    & & $\largesquare$ & \textbigcircle  \\ \cline{3-4}
+You & $\largesquare$ & \multicolumn{1}{|c|}{$1,2$} & \multicolumn{1}{c|}{$3,4$}  \\ \cline{3-4}
+    & \textbigcircle & \multicolumn{1}{|c|}{$5,6$} & \multicolumn{1}{c|}{$7,8$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+In this particular matrix, you and another participant can choose between two options, $\largesquare$ and \textbigcircle, such that your money will depend on your choice as well as on the choice of the other participant. If you both choose $\largesquare$ then you will earn \$1 and the other participant will earn \$2. If you choose $\largesquare$ and the other participant chooses \textbigcircle, then you will earn \$3 and the other participant will earn \$4. If you choose $\largetriangleup$ and the other participant chooses $\largesquare$, then you will earn \$5 and the other participant will earn \$6. Finally, if you both choose \textbigcircle then you will earn \$7 and the other participant will get \$8.\\
+
+This is just an example for you to learn how to read a matrix. Are there any questions?\\
+
+You will be presented with 5 different matrices and in each of them you will have to choose between two options, $\largesquare$ and \textbigcircle. The numbers and therefore the money you can earn will change from matrix to matrix, and the matrices will be different from the example above. All of you will be making decisions for the same 5 matrices. For each matrix, you will be matched with another participant. You will not know the identity of this person and the other person will not know your identity either. The matching between participants is done at random. You will not know the other participants' choices until the end of the experiment.\\
+
+Right on top of each of the matrices you will find a question such as:
+\begin{quote}
+\begin{center}
+{\Huge \textbigcircle}
+\end{center}
+ \centering Is this a circle or a square?
+\end{quote}
+You will not be able to submit your choice (\textbigcircle or $\largesquare$) for the matrix unless you click on the right answer. All of you will see exactly the same question and matrix. \\
+
+We will not pay you for all the 5 matrices but for one unique matrix. At the end of the experiment, one matrix will be randomly chosen, and the money you earn will be determined by your choice and your matched participant's choice in the randomly chosen matrix. At the end of the experiment, we will show you which matrix has been chosen, we will remind you about your choice in that particular matrix, and we will also show you your matched participant's choice in that particular matrix, so that you know how much you have earned in this part of the experiment.\\
+
+If everything is clear then we will start with the first part of the experiment.
+\end{tcolorbox}
+
+
+
+\paragraph{Screens 3-7} Subjects play a series of 5 games. If $T_s^1=0$ and $T_s^2=0$ (regular payments and no social cues), then screens 3--7 are as follows:
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+  &  & $\largesquare$ & $\largetriangleup$  \\ \cline{3-4}
+You & $\largesquare$ & \multicolumn{1}{|c|}{$10,10$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largetriangleup$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$10,10$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largesquare$ and $\largetriangleup$. If you both choose the same symbol, you each get \$10. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+$\largesquare$ \qquad $\largetriangleup$
+\end{center}
+\end{tcolorbox}
+
+
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+  &  & \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} & \textbigcircle  \\ \cline{3-4}
+You & \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} & \multicolumn{1}{|c|}{$22,22$} & \multicolumn{1}{c|}{$0,7$}  \\ \cline{3-4}
+& \textbigcircle & \multicolumn{1}{|c|}{$7,0$} & \multicolumn{1}{c|}{$10,10$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} and \textbigcircle. If you both choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you each get \$22. If you both choose \textbigcircle, you each get \$10. If you choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} and the other participant choose \textbigcircle, you get \$0 and the other participant \$7. If you choose \textbigcircle and the other participant chooses \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you get \$7 and the other participant \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+\raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} \qquad \textbigcircle
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``row'' (i.e., $r_i=\text{row}$), then the next screen is:
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largetriangleup$ & $\largestar$  \\ \cline{3-4}
+You & $\largetriangleup$ & \multicolumn{1}{|c|}{$22,20$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largestar$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$20,22$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+
+You and another participant can choose between two symbols, $\largetriangleup$ and $\largestar$. If you both choose $\largetriangleup$, you get \$22 and the other participant gets \$20. If you both choose $\largestar$, then you get \$20 and the other participant gets \$22. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+$\largetriangleup$ \qquad $\largestar$
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``column'' (i.e., $r_i=\text{column}$), then the next screen is:
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largetriangleup$ & $\largestar$  \\ \cline{3-4}
+You & $\largetriangleup$ & \multicolumn{1}{|c|}{$20,22$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largestar$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$22,20$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+
+You and another participant can choose between two symbols, $\largetriangleup$ and $\largestar$. If you both choose $\largetriangleup$, you get \$20 and the other participant gets \$22. If you both choose $\largestar$, then you get \$22 and the other participant gets \$20. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+$\largetriangleup$ \qquad $\largestar$
+\end{center}
+\end{tcolorbox}
+
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+  &  & \textbigcircle & \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}  \\ \cline{3-4}
+You & \textbigcircle & \multicolumn{1}{|c|}{$22,22$} & \multicolumn{1}{c|}{$0,2$}  \\ \cline{3-4}
+& \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} & \multicolumn{1}{|c|}{$2,0$} & \multicolumn{1}{c|}{$10,10$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, \textbigcircle and \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}. If you both choose \textbigcircle, you each get \$22. If you both choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you each get \$10. If you choose \textbigcircle and the other participant choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you get \$0 and the other participant \$2. If you choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} and the other participant chooses \textbigcircle, you get \$2 and the other participant \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+\textbigcircle \qquad \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``row'' (i.e., $r_i=\text{row}$), then the next screen is:
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largestar$ & $\largesquare$  \\ \cline{3-4}
+You & $\largestar$ & \multicolumn{1}{|c|}{$22,20$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largesquare$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$15,17$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largestar$ and $\largesquare$. If you both choose $\largestar$, you get \$22 and the other participant gets \$20. If you both choose $\largesquare$, then you get \$15 and the other participant gets \$17. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+
+\begin{center}
+$\largestar$ \qquad $\largesquare$
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``column'' (i.e., $r_i=\text{column}$), then the next screen is:
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largestar$ & $\largesquare$  \\ \cline{3-4}
+You & $\largestar$ & \multicolumn{1}{|c|}{$20,22$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largesquare$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$17,15$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largestar$ and $\largesquare$. If you both choose $\largestar$, you get \$20 and the other participant gets \$22. If you both choose $\largesquare$, then you get \$17 and the other participant gets \$15. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+
+\begin{center}
+$\largestar$ \qquad $\largesquare$
+\end{center}
+\end{tcolorbox}
+
+
+If $T_s^1=1$ and $T_s^2=0$ (high payments and no social cues), then screens 3--7 are as follows:
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+  &  & $\largesquare$ & $\largetriangleup$  \\ \cline{3-4}
+ You & $\largesquare$ & \multicolumn{1}{|c|}{$20,20$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+  & $\largetriangleup$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$20,20$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largesquare$ and $\largetriangleup$. If you both choose the same symbol, you each get \$20. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+$\largesquare$ \qquad $\largetriangleup$
+\end{center}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+  &  & \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} & \textbigcircle  \\ \cline{3-4}
+You & \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} & \multicolumn{1}{|c|}{$44,44$} & \multicolumn{1}{c|}{$0,14$}  \\ \cline{3-4}
+& \textbigcircle & \multicolumn{1}{|c|}{$14,0$} & \multicolumn{1}{c|}{$20,20$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} and \textbigcircle. If you both choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you each get \$44. If you both choose \textbigcircle, you each get \$20. If you choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} and the other participant choose \textbigcircle, you get \$0 and the other participant \$14. If you choose \textbigcircle and the other participant chooses \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you get \$14 and the other participant \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+\raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} \qquad \textbigcircle
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``row'' (i.e., $r_i=\text{row}$), then the next screen is:
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largetriangleup$ & $\largestar$  \\ \cline{3-4}
+You & $\largetriangleup$ & \multicolumn{1}{|c|}{$44,40$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largestar$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$40,44$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largetriangleup$ and $\largestar$. If you both choose $\largetriangleup$, you get \$44 and the other participant gets \$40. If you both choose $\largestar$, then you get \$40 and the other participant gets \$44. If you choose different symbols, you each get \$0.\\
+
+
+Please choose one of the symbols.\\
+
+\begin{center}
+$\largetriangleup$ \qquad $\largestar$
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``column'' (i.e., $r_i=\text{column}$), then the next screen is:
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largetriangleup$ & $\largestar$  \\ \cline{3-4}
+You & $\largetriangleup$ & \multicolumn{1}{|c|}{$40,44$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largestar$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$44,40$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largetriangleup$ and $\largestar$. If you both choose $\largetriangleup$, you get \$40 and the other participant gets \$44. If you both choose $\largestar$, then you get \$44 and the other participant gets \$40. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+$\largetriangleup$ \qquad $\largestar$
+\end{center}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & \textbigcircle & \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}  \\ \cline{3-4}
+You & \textbigcircle & \multicolumn{1}{|c|}{$44,44$} & \multicolumn{1}{c|}{$0,4$}  \\ \cline{3-4}
+& \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} & \multicolumn{1}{|c|}{$4,0$} & \multicolumn{1}{c|}{$20,20$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, \textbigcircle and \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}. If you both choose \textbigcircle, you each get \$44. If you both choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you each get \$20. If you choose \textbigcircle and the other participant choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you get \$0 and the other participant \$4. If you choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} and the other participant chooses \textbigcircle, you get \$4 and the other participant \$0.\\
+
+
+Please choose one of the symbols.\\
+
+\begin{center}
+\textbigcircle \qquad \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``row'' (i.e., $r_i=\text{row}$), then the next screen is:
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largestar$ & $\largesquare$  \\ \cline{3-4}
+You & $\largestar$ & \multicolumn{1}{|c|}{$44,40$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largesquare$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$30,34$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largestar$ and $\largesquare$. If you both choose $\largestar$, you get \$44 and the other participant gets \$40. If you both choose $\largesquare$, then you get \$30 and the other participant gets \$34. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+
+\begin{center}
+$\largestar$ \qquad $\largesquare$
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``column'' (i.e., $r_i=\text{column}$), then the next screen is:
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largestar$ & $\largesquare$  \\ \cline{3-4}
+You & $\largestar$ & \multicolumn{1}{|c|}{$40,44$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largesquare$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$34,30$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largestar$ and $\largesquare$. If you both choose $\largestar$, you get \$40 and the other participant gets \$44. If you both choose $\largesquare$, then you get \$34 and the other participant gets \$30. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+
+\begin{center}
+$\largestar$ \qquad $\largesquare$
+\end{center}
+\end{tcolorbox}
+
+If $T_s^1=0$ and $T_s^2=1$ (regular payments and social cues), then screens 3--7 are as follows:
+
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge $\largetriangleup$}
+\end{center}
+ \centering Is this a triangle or a star?
+
+ \begin{center}
+$\largetriangleup$ \qquad $\largestar$
+\end{center}
+\end{quote}
+
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+  &  & $\largesquare$ & $\largetriangleup$  \\ \cline{3-4}
+You & $\largesquare$ & \multicolumn{1}{|c|}{$10,10$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largetriangleup$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$10,10$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largesquare$ and $\largetriangleup$. If you both choose the same symbol, you each get \$10. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+$\largesquare$ \qquad $\largetriangleup$
+\end{center}
+\end{tcolorbox}
+
+
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge \textbigcircle}
+\end{center}
+ \centering Is this a circle or a triangle?
+
+ \begin{center}
+\textbigcircle \qquad $\largetriangleup$
+\end{center}
+\end{quote}
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+  &  & \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} & \textbigcircle  \\ \cline{3-4}
+You & \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} & \multicolumn{1}{|c|}{$22,22$} & \multicolumn{1}{c|}{$0,7$}  \\ \cline{3-4}
+& \textbigcircle & \multicolumn{1}{|c|}{$7,0$} & \multicolumn{1}{c|}{$10,10$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} and \textbigcircle. If you both choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you each get \$22. If you both choose \textbigcircle, you each get \$10. If you choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} and the other participant choose \textbigcircle, you get \$0 and the other participant \$7. If you choose \textbigcircle and the other participant chooses \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you get \$7 and the other participant \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+\raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} \qquad \textbigcircle
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``row'' (i.e., $r_i=\text{row}$), then the next screen is:
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge $\largestar$}
+\end{center}
+ \centering Is this a star or a circle?
+
+ \begin{center}
+$\largestar$ \qquad \textbigcircle
+\end{center}
+\end{quote}
+
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largetriangleup$ & $\largestar$  \\ \cline{3-4}
+You & $\largetriangleup$ & \multicolumn{1}{|c|}{$22,20$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largestar$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$20,22$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+
+You and another participant can choose between two symbols, $\largetriangleup$ and $\largestar$. If you both choose $\largetriangleup$, you get \$22 and the other participant gets \$20. If you both choose $\largestar$, then you get \$20 and the other participant gets \$22. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+$\largetriangleup$ \qquad $\largestar$
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``column'' (i.e., $r_i=\text{column}$), then the next screen is:
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge $\largestar$}
+\end{center}
+ \centering Is this a star or a circle?
+
+ \begin{center}
+$\largestar$ \qquad \textbigcircle
+\end{center}
+\end{quote}
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largetriangleup$ & $\largestar$  \\ \cline{3-4}
+You & $\largetriangleup$ & \multicolumn{1}{|c|}{$20,22$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largestar$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$22,20$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+
+You and another participant can choose between two symbols, $\largetriangleup$ and $\largestar$. If you both choose $\largetriangleup$, you get \$20 and the other participant gets \$22. If you both choose $\largestar$, then you get \$22 and the other participant gets \$20. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+$\largetriangleup$ \qquad $\largestar$
+\end{center}
+\end{tcolorbox}
+
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}}
+\end{center}
+ \centering Is this a rectangle or a star?
+
+ \begin{center}
+\raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} \qquad $\largestar$
+\end{center}
+\end{quote}
+
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+  &  & \textbigcircle & \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}  \\ \cline{3-4}
+You & \textbigcircle & \multicolumn{1}{|c|}{$22,22$} & \multicolumn{1}{c|}{$0,2$}  \\ \cline{3-4}
+& \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} & \multicolumn{1}{|c|}{$2,0$} & \multicolumn{1}{c|}{$10,10$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, \textbigcircle and \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}. If you both choose \textbigcircle, you each get \$22. If you both choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you each get \$10. If you choose \textbigcircle and the other participant choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you get \$0 and the other participant \$2. If you choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} and the other participant chooses \textbigcircle, you get \$2 and the other participant \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+\textbigcircle \qquad \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``row'' (i.e., $r_i=\text{row}$), then the next screen is:
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge $\largesquare$}
+\end{center}
+ \centering Is this a square or a triangle?
+
+ \begin{center}
+$\largesquare$ \qquad $\largetriangleup$
+\end{center}
+\end{quote}
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largestar$ & $\largesquare$  \\ \cline{3-4}
+You & $\largestar$ & \multicolumn{1}{|c|}{$22,20$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largesquare$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$15,17$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largestar$ and $\largesquare$. If you both choose $\largestar$, you get \$22 and the other participant gets \$20. If you both choose $\largesquare$, then you get \$15 and the other participant gets \$17. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+
+\begin{center}
+$\largestar$ \qquad $\largesquare$
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``column'' (i.e., $r_i=\text{column}$), then the next screen is:
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge $\largesquare$}
+\end{center}
+ \centering Is this a square or a triangle?
+
+ \begin{center}
+$\largesquare$ \qquad $\largetriangleup$
+\end{center}
+\end{quote}
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largestar$ & $\largesquare$  \\ \cline{3-4}
+You & $\largestar$ & \multicolumn{1}{|c|}{$20,22$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largesquare$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$17,15$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largestar$ and $\largesquare$. If you both choose $\largestar$, you get \$20 and the other participant gets \$22. If you both choose $\largesquare$, then you get \$17 and the other participant gets \$15. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+
+\begin{center}
+$\largestar$ \qquad $\largesquare$
+\end{center}
+\end{tcolorbox}
+
+
+If $T_s^1=1$ and $T_s^2=1$ (high payments and social cues), then screens 3--7 are as follows:
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge $\largetriangleup$}
+\end{center}
+ \centering Is this a triangle or a star?
+
+ \begin{center}
+$\largetriangleup$ \qquad $\largestar$
+\end{center}
+\end{quote}
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+  &  & $\largesquare$ & $\largetriangleup$  \\ \cline{3-4}
+ You & $\largesquare$ & \multicolumn{1}{|c|}{$20,20$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+  & $\largetriangleup$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$20,20$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largesquare$ and $\largetriangleup$. If you both choose the same symbol, you each get \$20. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+$\largesquare$ \qquad $\largetriangleup$
+\end{center}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge \textbigcircle}
+\end{center}
+ \centering Is this a circle or a triangle?
+
+ \begin{center}
+\textbigcircle \qquad $\largetriangleup$
+\end{center}
+\end{quote}
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+  &  & \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} & \textbigcircle  \\ \cline{3-4}
+You & \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} & \multicolumn{1}{|c|}{$44,44$} & \multicolumn{1}{c|}{$0,14$}  \\ \cline{3-4}
+& \textbigcircle & \multicolumn{1}{|c|}{$14,0$} & \multicolumn{1}{c|}{$20,20$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} and \textbigcircle. If you both choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you each get \$44. If you both choose \textbigcircle, you each get \$20. If you choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} and the other participant choose \textbigcircle, you get \$0 and the other participant \$14. If you choose \textbigcircle and the other participant chooses \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you get \$14 and the other participant \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+\raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} \qquad \textbigcircle
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``row'' (i.e., $r_i=\text{row}$), then the next screen is:
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge $\largestar$}
+\end{center}
+ \centering Is this a star or a circle?
+
+ \begin{center}
+$\largestar$ \qquad \textbigcircle
+\end{center}
+\end{quote}
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largetriangleup$ & $\largestar$  \\ \cline{3-4}
+You & $\largetriangleup$ & \multicolumn{1}{|c|}{$44,40$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largestar$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$40,44$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largetriangleup$ and $\largestar$. If you both choose $\largetriangleup$, you get \$44 and the other participant gets \$40. If you both choose $\largestar$, then you get \$40 and the other participant gets \$44. If you choose different symbols, you each get \$0.\\
+
+
+Please choose one of the symbols.\\
+
+\begin{center}
+$\largetriangleup$ \qquad $\largestar$
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``column'' (i.e., $r_i=\text{column}$), then the next screen is:
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge $\largestar$}
+\end{center}
+ \centering Is this a star or a circle?
+
+ \begin{center}
+$\largestar$ \qquad \textbigcircle
+\end{center}
+\end{quote}
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largetriangleup$ & $\largestar$  \\ \cline{3-4}
+You & $\largetriangleup$ & \multicolumn{1}{|c|}{$40,44$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largestar$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$44,40$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largetriangleup$ and $\largestar$. If you both choose $\largetriangleup$, you get \$40 and the other participant gets \$44. If you both choose $\largestar$, then you get \$44 and the other participant gets \$40. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+\begin{center}
+$\largetriangleup$ \qquad $\largestar$
+\end{center}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}}
+\end{center}
+ \centering Is this a rectangle or a star?
+
+ \begin{center}
+\raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} \qquad $\largestar$
+\end{center}
+\end{quote}
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & \textbigcircle & \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}  \\ \cline{3-4}
+You & \textbigcircle & \multicolumn{1}{|c|}{$44,44$} & \multicolumn{1}{c|}{$0,4$}  \\ \cline{3-4}
+& \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} & \multicolumn{1}{|c|}{$4,0$} & \multicolumn{1}{c|}{$20,20$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, \textbigcircle and \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}. If you both choose \textbigcircle, you each get \$44. If you both choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you each get \$20. If you choose \textbigcircle and the other participant choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}, you get \$0 and the other participant \$4. If you choose \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}} and the other participant chooses \textbigcircle, you get \$4 and the other participant \$0.\\
+
+
+Please choose one of the symbols.\\
+
+\begin{center}
+\textbigcircle \qquad \raisebox{0.1ex}{\includegraphics[width=10pt]{rectangle}}
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``row'' (i.e., $r_i=\text{row}$), then the next screen is:
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge $\largesquare$}
+\end{center}
+ \centering Is this a square or a triangle?
+
+ \begin{center}
+$\largesquare$ \qquad $\largetriangleup$
+\end{center}
+\end{quote}
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largestar$ & $\largesquare$  \\ \cline{3-4}
+You & $\largestar$ & \multicolumn{1}{|c|}{$44,40$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largesquare$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$30,34$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largestar$ and $\largesquare$. If you both choose $\largestar$, you get \$44 and the other participant gets \$40. If you both choose $\largesquare$, then you get \$30 and the other participant gets \$34. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+
+\begin{center}
+$\largestar$ \qquad $\largesquare$
+\end{center}
+\end{tcolorbox}
+
+If a subject $i$ has role ``column'' (i.e., $r_i=\text{column}$), then the next screen is:
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+{\Huge $\largesquare$}
+\end{center}
+ \centering Is this a square or a triangle?
+
+ \begin{center}
+$\largesquare$ \qquad $\largetriangleup$
+\end{center}
+\end{quote}
+
+\begin{quote}
+\begin{center}
+\begin{tabular}{llcc}
+    & & \multicolumn{2}{c}{Other Participant}  \\
+& & $\largestar$ & $\largesquare$  \\ \cline{3-4}
+You & $\largestar$ & \multicolumn{1}{|c|}{$40,44$} & \multicolumn{1}{c|}{$0,0$}  \\ \cline{3-4}
+& $\largesquare$ & \multicolumn{1}{|c|}{$0,0$} & \multicolumn{1}{c|}{$34,30$}  \\ \cline{3-4}
+\end{tabular}
+\end{center}
+\end{quote}
+
+You and another participant can choose between two symbols, $\largestar$ and $\largesquare$. If you both choose $\largestar$, you get \$40 and the other participant gets \$44. If you both choose $\largesquare$, then you get \$34 and the other participant gets \$30. If you choose different symbols, you each get \$0.\\
+
+Please choose one of the symbols.\\
+
+
+\begin{center}
+$\largestar$ \qquad $\largesquare$
+\end{center}
+\end{tcolorbox}
+
+
+
+
+
+\subsection{Part 2}
+
+In part 2 of the experiment, subjects participate in 3 tasks.
+
+\paragraph{Screen 8} This is a welcome screen. It reads:
+
+\begin{tcolorbox}
+  In this part of the experiment you will be asked to make decisions in three different tasks. In each of them, you can earn more money.
+\end{tcolorbox}
+
+\subsubsection{Task 1 of part 2}
+
+\paragraph{Screen 9} This screen introduces the task 1 of part 2 with the following message:
+
+\begin{tcolorbox}
+On the next screen you will be given 8 different options. Each option offers 2 different amounts of money that you can win by choosing that option. You will be asked to choose one of the options. At the end of the experiment the computer will randomly pick one of the outcomes for the option that you have chosen and you will be paid accordingly. For example, if you choose an option that offers outcomes \$1.00 and \$2.00, then you receive \$1.00 with probability 50\% and \$2.00 with probability 50\%.  Hence, which of the 2 outcomes you receive depends exclusively on luck.
+\end{tcolorbox}
+
+\paragraph{Screen 10} This screen presents the task 1 of part 2. If $T_s^1=0$ (regular payments), then subjects see the following message:
+
+\begin{tcolorbox}
+Below this text you will find the 8 available options. To see how to read this table, consider option 5. In this option the possible results are \$0.70 and \$2.70. Both are equally likely, which means that the computer will choose \$0.70 as the payment half the time and \$2.70 the other half.\\
+
+You must choose one of the 8 possible options. You can choose an option by entering its number (from 1 to 8) in the empty box below the table.
+
+\begin{quote}
+\begin{center}
+	\begin{tabular}{c|c|c|}
+		Option & Probability 50\% & Probability 50\% \\
+		\hline 1 & \$1.50 & \$1.50 \\
+		\hline 2 & \$1.30 & \$1.80 \\
+		\hline 3 & \$1.10 & \$2.10 \\
+		\hline 4 & \$0.90 & \$2.40 \\
+		\hline 5 & \$0.70 & \$2.70 \\
+		\hline 6 & \$0.60 & \$2.80 \\
+		\hline 7 & \$0.40 & \$2.90 \\
+		\hline 8 & \$0.00 & \$3.00 \\
+		\hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+
+If $T_s^1=1$ (high payments), then subjects see the following message:
+
+\begin{tcolorbox}
+Below this text you will find the 8 available options. To see how to read this table, consider option 5. In this option the possible results are \$0.70 and \$2.70. Both are equally likely, which means that the computer will choose \$0.70 as the payment half the time and \$2.70 the other half.\\
+
+You must choose one of the 8 possible options. You can choose an option by entering its number (from 1 to 8) in the empty box below the table.
+
+\begin{quote}
+\begin{center}
+	\begin{tabular}{c|c|c|}
+		Option & Probability 50\% & Probability 50\% \\
+		\hline 1 & \$3.00 & \$3.00 \\
+		\hline 2 & \$2.60 & \$3.60 \\
+		\hline 3 & \$2.20 & \$4.20 \\
+		\hline 4 & \$1.80 & \$4.80 \\
+		\hline 5 & \$1.40 & \$5.40 \\
+		\hline 6 & \$1.20 & \$5.60 \\
+		\hline 7 & \$0.80 & \$5.80 \\
+		\hline 8 & \$0.00 & \$6.00 \\
+		\hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+
+In all treatments, screen 10 has an empty box below the table where subjects can enter the number (from 1 to 8) of the option that they want to choose.
+
+\subsubsection{Task 2 of part 2}
+
+\paragraph{Screen 11} This screen introduces task 2 of part 2. It displays the following message:
+
+\begin{tcolorbox}
+Next you will be matched randomly with another participant in this room. You will be presented with 6 situations in which you will have to choose one of 9 options. Each option represents the amount of money that you can earn from this task and the amount that the participant with whom you are matched can earn.\\
+
+At the end of the task one participant in the matching will be randomly selected as the Decisor and the other as Receptor. The computer will randomly select one of the 6 situations and the payment that you will receive is the following:
+\begin{itemize}
+	\item If you are the Decisor, you will receive the amount you have chosen for yourself in the situation selected by the computer
+	\item If you are the Receptor, you will receive what the other participant has chosen for you in the situation selected by the computer
+\end{itemize}
+\end{tcolorbox}
+
+\paragraph{Screen 12} This screen displays the choices. For each choice, subjects can select a pair of outcomes by ticking a box underneath their desired pair. In addition, they should enter the numbers corresponding to their choice in a text box next to the list of options, as indicated below.
+
+If $T_s^1=0$ (regular payments), then subjects are presented with the following choices: 
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+Please select your preferred outcome from the options below by ticking the box underneath it and by entering the payments that you and the other participant receive under this outcome in the boxes on the right. All payments are in dollars.\\
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-12} You receive: & 10.00&	9.40	&8.80	&8.10	&7.50	&6.90&	6.30&	5.80	&5.00 & You:& \\ 
+Other receives: &5.00	&5.80 &	6.30 &	6.90	&7.50 &	8.10&	8.80	&9.40	&10.00 &Other: & \\ \cline{2-12}
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+Please select your preferred outcome from the options below by ticking the box underneath it and by entering the payments that you and the other participant receive under this outcome in the boxes on the right. All payments are in dollars.\\
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-12} You receive: & 8.50	&8.70&	8.90	&9.10	&9.30&	9.40	&9.60&	9.80	&10.00 & You:& \\ 
+Other receives: &1.50	&1.90&	2.40&	2.80&	3.30&	3.70&	4.10&	4.60&	5.00 &Other: & \\ \cline{2-12}
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+Please select your preferred outcome from the options below by ticking the box underneath it and by entering the payments that you and the other participant receive under this outcome in the boxes on the right. All payments are in dollars.\\
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-12} You receive: & 5.00&	5.40	&5.90	&6.30	&6.80&	7.20	&7.60&	8.10&	8.50 & You:& \\ 
+Other receives: &10.00&	9.80&	9.60	&9.40	&9.30&	9.10&	8.90&	8.70&	8.50 &Other: & \\ \cline{2-12}
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}								
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+Please select your preferred outcome from the options below by ticking the box underneath it and by entering the payments that you and the other participant receive under this outcome in the boxes on the right. All payments are in dollars.\\
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-12} You receive: & 5.00	&5.40&	5.90&	6.30&	6.80&	7.20&	7.60&	8.10&	8.50 & You:& \\ 
+Other receives: &10.00	&8.90&	7.90&	6.80&	5.80	&4.70&	3.60	&2.80&	1.50 &Other: & \\ \cline{2-12}
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+								
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+Please select your preferred outcome from the options below by ticking the box underneath it and by entering the payments that you and the other participant receive under this outcome in the boxes on the right. All payments are in dollars.\\
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-12}You receive: & 8.50 &	8.50&	8.50&	8.50	&8.50&	8.50	&8.50&	8.50&	8.50 & You:& \\ 
+Other receives: &8.50	&7.60&	6.80	&5.90	&5.00	&4.10&	3.30	&2.40	&1.50 &Other: & \\ \cline{2-12}
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+Please select your preferred outcome from the options below by ticking the box underneath it and by entering the payments that you and the other participant receive under this outcome in the boxes on the right. All payments are in dollars.\\
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-12} You receive: & 10.00	&9.80	&9.60&	9.40&	9.30&	9.10&	8.90&	8.70&	8.50 & You:& \\ 
+Other receives: &5.00	&5.40	&5.90&	6.30&	6.80&	7.20	&7.60&	8.10&	8.50 &Other: & \\ \cline{2-12}
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+
+If $T_s^1=1$ (high payments), then subjects are presented with the following choices: 								
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+Please select your preferred outcome from the options below by ticking the box underneath it and by entering the payments that you and the other participant receive under this outcome in the boxes on the right. All payments are in dollars.\\
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-12} You receive: & 20.00&	18.80&	17.60	&16.20	&15.00	&13.80&	12.60	&11.60&	10.00 & You:& \\
+Other receives: &10.00	&11.60&	12.60	&13.80	&15.00	&16.20&	17.60&	18.80&	20.00 &Other: & \\ \cline{2-12}
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+Please select your preferred outcome from the options below by ticking the box underneath it and by entering the payments that you and the other participant receive under this outcome in the boxes on the right. All payments are in dollars.\\
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-12} You receive: & 17.00&	17.40&	17.80	&18.20&	18.60	&18.80	&19.20&	19.60&	20.00 & You:& \\
+Other receives: &3.00	&3.80	&4.80&	5.60	&6.60&	7.40&	8.20&	9.20&	10.00 &Other: & \\ \cline{2-12}
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+Please select your preferred outcome from the options below by ticking the box underneath it and by entering the payments that you and the other participant receive under this outcome in the boxes on the right. All payments are in dollars.\\
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-12} You receive: & 10.00	&10.80&	11.80&	12.60&	13.60&	14.40	&15.20&	16.20&	17.00 & You:& \\
+Other receives: &20.00	&19.60&	19.20&	18.80&	18.60&	18.20&	17.80&	17.40&	17.00 &Other: & \\ \cline{2-12}
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}								
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+Please select your preferred outcome from the options below by ticking the box underneath it and by entering the payments that you and the other participant receive under this outcome in the boxes on the right. All payments are in dollars.\\
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-12} You receive: & 10.00&	10.80&	11.80&	12.60&	13.60&	14.40&	15.20&	16.20	&17.00 & You:& \\
+Other receives: &20.00&	17.80&	15.80&	13.60	&11.60&	9.40	&7.20&	5.60	&3.00 &Other: & \\ \cline{2-12}
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+								
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+Please select your preferred outcome from the options below by ticking the box underneath it and by entering the payments that you and the other participant receive under this outcome in the boxes on the right. All payments are in dollars.\\
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-12}You receive: & 17.00&	17.00	&17.00&	17.00&	17.00&	17.00&	17.00&	17.00&	17.00 & You:& \\
+Other receives: &17.00	&15.20	&13.60&	11.80	&10.00&	8.20&	6.60&	4.80&	3.00 &Other: & \\ \cline{2-12}
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\begin{quote}
+\begin{center}
+Please select your preferred outcome from the options below by ticking the box underneath it and by entering the payments that you and the other participant receive under this outcome in the boxes on the right. All payments are in dollars.\\
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-12} You receive: & 20.00&	19.60&	19.20&	18.80&	18.60&	18.20	&17.80&	17.40	&17.00  & You:& \\
+Other receives: &10.00&	10.80&	11.80&	12.60&	13.60&	14.40&	15.20	&16.20	&17.00  &Other: & \\ \cline{2-12}
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+
+\subsubsection{Task 3 of part 2}
+
+\paragraph{Screen 13} This screen shows task 3 of part 2. The screen should have a text box where subjects can enter a number between 0 and 100 (see below). If $T_s^1=1$ (high payments), then subjects see the following message:
+
+\begin{tcolorbox}
+In this part, the money you can earn depends on your choice and the choice of all other subjects. We will ask you to choose a number between 0 and 100. The computer will then calculate the average of the numbers chosen by all participants in this session. The participant whose chosen number is closest to 2/3 times the average of all chosen numbers will win \$9 and the rest will receive \$0.\\
+
+Please, choose a number between 0 and 100.
+\end{tcolorbox}
+
+If $T_s^1=0$ (regular payments), then subjects see the following message:
+
+\begin{tcolorbox}
+In this part, the money you can earn depends on your choice and the choice of all other subjects. We will ask you to choose a number between 0 and 100. The computer will then calculate the average of the numbers chosen by all participants in this session. The participant whose chosen number is closest to 2/3 times the average of all chosen numbers will win \$5 and the rest will receive \$0.\\
+
+Please, choose a number between 0 and 100.
+\end{tcolorbox}
+
+\subsection{Part 3}
+
+In part 3 of the experiment, subjects do three tasks.
+
+\subsubsection{Task 1 of part 3}
+
+\paragraph{Screen 14} This is an introductory screen. It displays the following message:
+
+\begin{tcolorbox}
+Please answer the questions below. You will make your selection on a 4-point scale to indicate how strongly a statement applies or does not apply to you.
+\end{tcolorbox}
+
+\paragraph{Screen 15} This screen presents task 1 of part 3. Each question comes with a Likert scale, as indicated below. It can be broken up into multiple screens if necessary (as is done here).
+
+\begin{tcolorbox}
+I prefer to do things the same way over and over again. \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+Other people frequently tell me that what I've said is impolite, even though I think it is polite. \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+In a social group, I can easily keep track of several different people's conversations.  \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+When I'm reading a story, I find it difficult to work out the characters' intentions.  \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+I don't particularly enjoy reading fiction.  \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+I find it easy to ``read between the lines'' when someone is talking to me.  \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+I don't usually notice small changes in a situation or a person's appearance. \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote} 
+\end{tcolorbox}
+\begin{tcolorbox}
+I know how to tell if someone listening to me is getting bored.  \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+I find it easy to do more than one thing at once.  \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+When I talk on the phone, I'm not sure when it's my turn to speak.  \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+I am often the last to understand the point of a joke. \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox} 
+I find it easy to work out what someone is thinking or feeling just by looking at their face.  \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+If there is an interruption, I can switch back to what I was doing very quickly. \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox} 
+People often tell me that I keep going on and on about the same thing. \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox} 
+I find it difficult to work out people's intentions.  \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+I am a good diplomat. \\
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+\hline
+		1-Definitely Disagree & 2-Slightly Disagree & 3-Slightly Agree & 4-Definitely Agree\\ \hline
+	\end{tabular}
+\end{center}
+\end{quote} 
+\end{tcolorbox}
+
+
+
+
+\subsubsection{Task 2 of part 3}
+
+\paragraph{Screen 16} This is an introductory screen. It displays the following message:
+
+\begin{tcolorbox}
+Below we will present you questions asked in a series of national American surveys in recent years. Some are fact-based questions.  Some are opinion-based questions.  For each question, you will be asked to respond to a question asking you to pick between two options, A \& B. You will make your selection on a 7-point scale to indicate your preference for option A or B. The responses of previous participants in a previous survey will be visible to you next to each option, but you can feel free to ignore this information.  Specifically, the percentage of previous participants that prefer a particular option will be listed in parentheses next to each one (if percentages don't add up to 100 it is because there was a no-response or another option available).
+\end{tcolorbox}
+
+\paragraph{Screen 17} This screen contains the actual survey. It may be best to use a ``Likert'' scale here (horizontal scale from 1 to 7) if possible. It can be broken up into multiple screens if necessary (as is done here).
+
+\begin{tcolorbox}
+Do you think the space station has been a good investment for this country, or don’t you think so? \\
+\begin{center}
+ A Good investment (64\%);  B Not a good investment (29\%)
+\end{center}
+
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+		1=Definitely Option A & 2 & 3 & 4 & 5 & 6 & 7=Definitely Option B \\ \hline
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+
+Do you have a favorable or unfavorable opinion of Bill Cosby?     \\
+\begin{center}
+A  Unfavorable (61\%); B Favorable (22\%)
+\end{center}
+
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+		1=Definitely Option A & 2 & 3 & 4 & 5 & 6 & 7=Definitely Option B \\ \hline
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+
+Do you generally like it or dislike it if people get you socks as a gift?     \\
+\begin{center}
+A Dislike (20\%); B Like (56\%)
+\end{center}
+
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+		1=Definitely Option A & 2 & 3 & 4 & 5 & 6 & 7=Definitely Option B \\ \hline
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+Which of the following kills one woman every minute each day around the world?     \\
+\begin{center}
+A Childbirth (15\%); B Heart Attack (54\%)
+\end{center}
+
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+		1=Definitely Option A & 2 & 3 & 4 & 5 & 6 & 7=Definitely Option B \\ \hline
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+Which of the following world empires came into existence first?  \\
+\begin{center}
+A Roman (64\%); B Ottoman (21\%)
+\end{center}
+
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+		1=Definitely Option A & 2 & 3 & 4 & 5 & 6 & 7=Definitely Option B \\ \hline
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+\begin{tcolorbox}
+Is the following statement true or false?: Plastic is made from oil.  \\
+\begin{center}
+A True (28\%); B False or unknown (72\%)
+\end{center}
+
+\begin{quote}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+		1=Definitely Option A & 2 & 3 & 4 & 5 & 6 & 7=Definitely Option B \\ \hline
+\end{tabular}
+\end{center}
+\end{quote}
+\end{tcolorbox}
+
+\subsubsection{Task 3 of part 3}
+
+
+\paragraph{Screen 18} Task 3 is a short IQ test. The following introduces the task:
+
+\begin{tcolorbox}
+For each of the following items, select the option 1, 2, 3, 4, 5, 6, 7, or 8 that best fits in the array above.
+\end{tcolorbox}
+
+The questions are in the document ``Raven.docx''
+
+\subsection{Demographic questions}
+
+\paragraph{Screen 19} Finally, there are two questions about demographics.
+
+\begin{tcolorbox}
+With which gender do you most closely identify?
+\begin{itemize}
+\item	Male
+\item	Female
+\item Other
+\end{itemize}
+
+How old are you?
+\end{tcolorbox}
+
+
+
+\section{End of the experiment}
+
+\paragraph{Screen 19} At the end of the experiment, subjects are shown which game from part 1 is selected for payment, which action they chose in that game, and which action their (anonymous) match chose. 
+
+\begin{tcolorbox}
+Thank you for participating in the experiment!\\
+
+The computer has selected the following matrix for payment: \\
+
+You chose the following action in this matrix:\\
+
+The other participant chose the following action in this matrix:\\
+
+Your earnings for the matrix are:\\
+
+Your total earnings are:\\
+
+
+\end{tcolorbox}
+
+\end{document}
+

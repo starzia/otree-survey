@@ -15,6 +15,7 @@ RUNNING IT
     $ otree startproject oTree
     $ cd oTree
     $ otree resetdb
+    $ otree collectstatic
     $ otree runserver
 
 or
