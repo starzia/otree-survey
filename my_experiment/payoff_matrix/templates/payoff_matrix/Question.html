@@ -1,14 +1,6 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 
-{% block title %}
-    Page title
-{% endblock %}
-
-{% block styles %}
-    <link href="{% static "payoff_matrix/style.css" %}" rel="stylesheet">
-{% endblock %}
-
 {% block content %}
 
 <div class="center">
@@ -17,15 +9,33 @@
             <td></td><td></td><td colspan="2">Other Participant</td>
         </tr>
         <tr>
-            <td></td><td></td><td>{{subsession.choices.0}}</td><td>{{subsession.choices.1}}</td>
+            <td></td><td></td><td>{{player.choices.0}}</td><td>{{player.choices.1}}</td>
         </tr>
         <tr>
-            <td>You</td><td>{{subsession.choices.0}}︎</td><td class="border">1, 2</td><td class="border">3, 4</td>
+            <td>You</td><td>{{player.choices.0}}︎</td>
+            <td class="border">
+                {{player.payoffs.0.0.0}}, {{player.payoffs.0.0.1}}
+            </td>
+            <td class="border">
+                {{player.payoffs.0.1.0}}, {{player.payoffs.0.1.1}}
+            </td>
         </tr>
         <tr>
-            <td></td><td>{{subsession.choices.1}}</td><td class="border">5, 6</td><td class="border">7, 8</td>
+            <td></td><td>{{player.choices.1}}</td>
+            <td class="border">
+                {{player.payoffs.1.0.0}}, {{player.payoffs.1.0.1}}
+            </td>
+            <td class="border">
+                {{player.payoffs.1.1.0}}, {{player.payoffs.1.1.1}}
+            </td>
         </tr>
     </table>
+</div>
+
+<p>{{player.question}}</p>
+<p>Please choose one of the symbols.</p>
+<div class="center">
+    {{player.choices.0}} {{player.choices.1}}
 </div>
 
     {% next_button %}

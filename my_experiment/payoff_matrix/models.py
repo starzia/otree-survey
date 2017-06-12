@@ -14,7 +14,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'payoff_matrix'
     players_per_group = None
-    shapes = '■︎●▲★▬'
+    shapes = ['■︎','●','▲','★','▬']
     choices = [
         [0,2],
         [4,1],
@@ -48,8 +48,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    def choices(self):
-        return [Constants.shapes[i] for i in Constants.choices[self.round_number-1]]
+    pass
 
 
 class Group(BaseGroup):
@@ -57,4 +56,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    def choices(self):
+        return [Constants.shapes[i] for i in Constants.choices[self.round_number-1]]
+
+    def payoffs(self):
+        return Constants.payoffs[self.round_number-1]

@@ -4,10 +4,15 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class Question(Page):
+class Instructions(Page):
+    pass
+
+
+class Example(Page):
     pass
 
 
 page_sequence = [
-    Question
+    Instructions,
+    Example
 ]
