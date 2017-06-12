@@ -47,6 +47,10 @@ class Constants(BaseConstants):
     num_rounds = len(payoffs)
 
 
+def double_payoffs(payoffs):
+    return [[[2*i for i in j] for j in k] for k in payoffs]
+
+
 class Subsession(BaseSubsession):
     pass
 
@@ -60,4 +64,5 @@ class Player(BasePlayer):
         return [Constants.shapes[i] for i in Constants.choices[self.round_number-1]]
 
     def payoffs(self):
-        return Constants.payoffs[self.round_number-1]
+        payoffs = Constants.payoffs[self.round_number-1]
+        return double_payoffs(payoffs) if self.session.config["high_payment"] else payoffs
