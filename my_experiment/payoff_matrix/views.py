@@ -14,6 +14,12 @@ class Question(Page):
     def social_cues_answer_choices(self):
         return self.player.social_cues()[3:5]
 
+
+class ResultsWaitPage(WaitPage):
+    def after_all_players_arrive(self):
+        self.group.set_payoffs()
+
+
 page_sequence = [
-    Question
+    Question, ResultsWaitPage
 ]

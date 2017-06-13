@@ -110,14 +110,31 @@ class Subsession(BaseSubsession):
         else:
             self.group_like_round(1)
 
+        # choose money round for each group
+        for g in self.get_groups():
+            if self.round_number == 1:
+                g.money_round = 1 + sample(range(Constants.num_rounds), 1)[0]
+            else:
+                g.money_round = g.in_round(1).money_round
+
 
 class Group(BaseGroup):
-    pass
+    money_round = models.PositiveIntegerField(doc="The round that pays out.")
+
+    def set_payoffs(self):
+        for p in self.get_players():
+            opponent = self.get_player_by_role("row" if p.role() == "column" else "column")
+            p.theoretical_payoff = c(p.payoffs()
+                                     [p.choices().index(p.matrix_answer)]  # player's choice
+                                     [opponent.choices().index(opponent.matrix_answer)]  # opponent's choice
+                                     [0])  # player's payout
+            p.payoff = p.theoretical_payoff if self.money_round == self.round_number else c(0);
 
 
 class Player(BasePlayer):
     matrix_answer = models.CharField(widget=widgets.RadioSelectHorizontal())
     social_cues_answer = models.CharField(widget=widgets.RadioSelectHorizontal())
+    theoretical_payoff = models.CurrencyField(doc="Amount to be paid if this round were a money round.")
 
     def choices(self):
         return [Constants.shapes[i] for i in Constants.choices[self.round_number-1]]
