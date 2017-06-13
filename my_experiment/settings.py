@@ -57,7 +57,7 @@ AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'USD'
-USE_POINTS = True
+USE_POINTS = False
 
 
 # e.g. en, de, fr, it, ja, zh-hans
@@ -102,7 +102,7 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.000,
+    'real_world_currency_per_point': 1.000,
     'participation_fee': 0.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
@@ -122,7 +122,8 @@ for high_payment in [False, True]:
                    'personality_test', 'conventional_wisdom_test', 'iq_test',  # part 3
                    'demographics'],
             'high_payment': high_payment,
-            'social_cues': social_cues
+            'social_cues': social_cues,
+            'participation_fee': 35.00 if high_payment else 20.00
         })
 
 # anything you put after the below line will override
