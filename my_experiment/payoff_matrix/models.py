@@ -91,15 +91,24 @@ def column_payoffs(payoffs):
 
 class Subsession(BaseSubsession):
     def before_session_starts(self):
-        # match players
+        # group players
         if self.round_number == 1:
             shuffled_players = sample(self.get_players(), len(self.get_players()))
+            list_of_lists = []
             for i, p in enumerate(shuffled_players):
-                # the last player has to be double-matched if he's the odd man out
-                partner_loc = (i-1) if i == len(shuffled_players) - 1 and i % 2 == 0 \
-                                    else (i-1 if i % 2 else i+1)  # most players pair-up cleanly
-                p.participant.vars['partner'] = shuffled_players[partner_loc].id_in_group
-                p.participant.vars['is_row'] = (i % 2 == 0)
+                # the last player has to be in a group of three if he's the odd man out
+                if i == len(shuffled_players) - 1 and i % 2 == 0:
+                    list_of_lists[-1].append(p)
+                # everyone else
+                elif i % 2 == 0:
+                    # start a new group
+                    list_of_lists.append([p])
+                else:
+                    # add to prior group
+                    list_of_lists[-1].append(p)
+            self.set_group_matrix(list_of_lists)
+        else:
+            self.group_like_round(1)
 
 
 class Group(BaseGroup):
@@ -107,11 +116,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    is_row = models.BooleanField()
-    partner = models.IntegerField()
     matrix_answer = models.CharField(widget=widgets.RadioSelectHorizontal())
     social_cues_answer = models.CharField(widget=widgets.RadioSelectHorizontal())
-
 
     def choices(self):
         return [Constants.shapes[i] for i in Constants.choices[self.round_number-1]]
@@ -138,7 +144,7 @@ class Player(BasePlayer):
         return "Is this a %s or a %s?" % tuple(self.social_cues()[1:3])
 
     def role(self):
-        return "row" if self.participant.vars["is_row"] else "column"
+        return "row" if self.id_in_group == 1 else "column"
 
     def description(self):
         payoffs = self.payoffs()
