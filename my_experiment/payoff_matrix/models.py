@@ -2,6 +2,7 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
+from random import sample
 
 
 author = 'Your name here'
@@ -34,10 +35,10 @@ class Constants(BaseConstants):
         ],
         [
             [[22,20],[0,0]],
-            [[7,0],[10,10]]
+            [[0,0],[20,22]]
         ],
         [
-            [[22,20],[0,2]],
+            [[22,22],[0,2]],
             [[2,0],[10,10]]
         ],
         [
@@ -59,8 +60,22 @@ def double_payoffs(payoffs):
     return [[[2*i for i in j] for j in k] for k in payoffs]
 
 
+def column_payoffs(payoffs):
+    transposed = [[payoffs[0][0], payoffs[1][0]], [payoffs[0][1], payoffs[1][1]]]
+    return [[list(reversed(j)) for j in i] for i in transposed]
+
+
 class Subsession(BaseSubsession):
-    pass
+    def before_session_starts(self):
+        # match players
+        if self.round_number == 1:
+            shuffled_players = sample(self.get_players(), len(self.get_players()))
+            for i, p in enumerate(shuffled_players):
+                # the last player has to be double-matched if he's the odd man out
+                partner_loc = (i-1) if i == len(shuffled_players) - 1 and i % 2 == 0 \
+                                    else (i-1 if i % 2 else i+1)  # most players pair-up cleanly
+                p.participant.vars['partner'] = shuffled_players[partner_loc].id_in_group
+                p.participant.vars['is_row'] = (i % 2 == 0)
 
 
 class Group(BaseGroup):
@@ -68,12 +83,16 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    is_row = models.BooleanField()
+    partner = models.IntegerField()
+
     def choices(self):
         return [Constants.shapes[i] for i in Constants.choices[self.round_number-1]]
 
     def payoffs(self):
         payoffs = Constants.payoffs[self.round_number-1]
-        return double_payoffs(payoffs) if self.session.config["high_payment"] else payoffs
+        payoffs = double_payoffs(payoffs) if self.session.config["high_payment"] else payoffs
+        return column_payoffs(payoffs) if self.role() == "column" else payoffs
 
     def show_social_cues(self):
         return self.session.config["social_cues"]
@@ -87,3 +106,6 @@ class Player(BasePlayer):
             Constants.shapes[cues[0]],
             Constants.shapes[cues[1]]
         ]
+
+    def role(self):
+        return "row" if self.participant.vars["is_row"] else "column"
