@@ -53,6 +53,30 @@ class Constants(BaseConstants):
         [4, 3],
         [0, 2]
     ]
+    descriptions = [
+        ("If you both choose the same symbol, you each get $%d. If you choose different symbols, you each get $0.",
+         [[0, 0, 0]]),  # index of payoff
+        ("If you both choose %s, you each get $%d. If you both choose %s, you each get $%d. "
+         + "If you choose %s and the other participant chooses %s, you get $0 and the other participant $%d. "
+         + "If you choose %s and the other participant chooses %s, you get $%d and the other participant $0.",
+         [0, [0, 0, 0], 1, [1, 1, 0], 0, 1, [0, 1, 1], 1, 0, [1, 0, 0]]),
+        ("If you both choose %s, you get $%d and the other participant gets $%d. "
+         + "If you both choose %s, then you get $%d and the other participant gets $%d. "
+         + "If you choose different symbols, you each get $0.",
+         [0, [0, 0, 0], [0, 0, 1], 1, [1, 1, 0], [1, 1, 1]]),
+        ("If you both choose %s, you each get $%d. "
+         + "If you both choose %s, you each get $%d. "
+         + "If you choose %s and the other participant chooses %s, you get $%d and the other participant $%d. "
+         + "If you choose %s and the other participant chooses %s, you get $%d and the other participant $%d. ",
+         [0, [0, 0, 0],
+          1, [1, 1, 0],
+          0, 1, [0, 1, 0], [0, 1, 1],
+          1, 0, [1, 0, 0], [1, 0, 1]]),
+        ("If you both choose %s, you get $%d and the other participant gets $%d. "
+         + "If you both choose %s, then you get $%d and the other participant gets $%d. "
+         + "If you choose different symbols, you each get $0.",
+         [0, [0, 0, 0], [0, 0, 1], 1, [1, 1, 0], [1, 1, 1]]),
+    ]
     num_rounds = len(payoffs)
 
 
@@ -109,3 +133,15 @@ class Player(BasePlayer):
 
     def role(self):
         return "row" if self.participant.vars["is_row"] else "column"
+
+    def description(self):
+        payoffs = self.payoffs()
+        (format_string, substitutions) = Constants.descriptions[self.round_number-1]
+        dereferenced = []
+        for i, s in enumerate(substitutions):
+            # dereference payoff
+            if isinstance(s, list):
+                dereferenced.append(payoffs[s[0]][s[1]][s[2]])
+            else:  # dereference shapes
+                dereferenced.append(self.choices()[s])
+        return format_string % tuple(dereferenced)
