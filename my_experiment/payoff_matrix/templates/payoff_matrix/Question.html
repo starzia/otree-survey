@@ -2,8 +2,13 @@
 {% load staticfiles otree_tags %}
 
 {% block content %}
-
 <div class="center">
+    {% if player.show_social_cues %}
+    <p style="font-size:300%; margin:0">{{player.social_cues.0}}</p>
+    <p>Is this a {{player.social_cues.1}} or a {{player.social_cues.2}}?</p>
+    <p>{{player.social_cues.3}} {{player.social_cues.4}}</p>
+    {% endif %}
+
     <table>
         <tr>
             <td></td><td></td><td colspan="2">Other Participant</td>

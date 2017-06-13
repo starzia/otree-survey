@@ -26,4 +26,5 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    def social_cues(self):
+        return self.session.config["social_cues"]
