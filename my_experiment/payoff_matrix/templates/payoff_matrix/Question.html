@@ -5,8 +5,7 @@
 <div class="center">
     {% if player.show_social_cues %}
     <p style="font-size:300%; margin:0">{{player.social_cues.0}}</p>
-    <p>Is this a {{player.social_cues.1}} or a {{player.social_cues.2}}?</p>
-    <p>{{player.social_cues.3}} {{player.social_cues.4}}</p>
+    {% formfield player.social_cues_answer label=player.social_cues_question %}
     {% endif %}
 
     <table>
@@ -41,9 +40,8 @@
 {{player.description}}
 </p>
 
-<p>Please choose one of the symbols.</p>
 <div class="center">
-    {{player.choices.0}} {{player.choices.1}}
+    {% formfield player.matrix_answer label="Please choose one of the symbols:" %}
 </div>
 
     {% next_button %}

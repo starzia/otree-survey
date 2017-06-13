@@ -109,6 +109,9 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     is_row = models.BooleanField()
     partner = models.IntegerField()
+    matrix_answer = models.CharField(widget=widgets.RadioSelectHorizontal())
+    social_cues_answer = models.CharField(widget=widgets.RadioSelectHorizontal())
+
 
     def choices(self):
         return [Constants.shapes[i] for i in Constants.choices[self.round_number-1]]
@@ -130,6 +133,9 @@ class Player(BasePlayer):
             Constants.shapes[cues[0]],
             Constants.shapes[cues[1]]
         ]
+
+    def social_cues_question(self):
+        return "Is this a %s or a %s?" % tuple(self.social_cues()[1:3])
 
     def role(self):
         return "row" if self.participant.vars["is_row"] else "column"

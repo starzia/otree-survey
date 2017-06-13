@@ -28,3 +28,6 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     def social_cues(self):
         return self.session.config["social_cues"]
+
+    def payment(self):
+        return 35 if self.session.config["high_payment"] else 20;
