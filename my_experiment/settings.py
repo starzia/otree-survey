@@ -118,7 +118,7 @@ for high_payment in [False, True]:
                                "with social" if social_cues else "without"),
             'num_demo_participants': 2,
             'app_sequence': ['instructions1', 'payoff_matrix',  # part 1
-                   'coin_toss', 'decider_receiver', 'two_thirds',  # part 2
+                   'coin_toss', 'decider_receiver_instructions', 'decider_receiver', 'two_thirds',  # part 2
                    'personality_test', 'conventional_wisdom_test', 'iq_test',  # part 3
                    'demographics'],
             'high_payment': high_payment,

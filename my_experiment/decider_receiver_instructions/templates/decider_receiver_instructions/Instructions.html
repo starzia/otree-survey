@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+    <p>Next you will be matched randomly with another participant in this room. You will be presented with 6 situations
+        in which you will have to choose one of 9 options. Each option represents the amount of money that you can earn
+        from this task and the amount that the participant with whom you are matched can earn.</p>
+
+<p>At the end of the task one participant in the matching will be randomly selected as the <em>Decider</em> and the other
+    as <em>Receiver</em>. The computer will randomly select one of the 6 situations and the payment that you will
+    receive is the following:</p>
+
+<ul>
+    <li>If you are the Decisor, you will receive the amount you have chosen for yourself in the situation selected by
+        the computer</li>
+    <li>If you are the Receptor, you will receive what the other participant has chosen for you in the situation
+        selected by the computer</li>
+</ul>
+    {% next_button %}
+{% endblock %}
+
+
