@@ -18,10 +18,35 @@
             <br/><input id="row{{forloop.counter}}" type="radio" name="answer" value="{{forloop.counter}}" required>
             </td>
         {% endfor %}
+            <td>You:<br/>Other:<br/>&nbsp;</td>
+            <td>
+                $<input id="typed-payout-0" type="text" size="5" required><br/>
+                $<input id="typed-payout-1" type="text" size="5" required><br/>&nbsp;
+            </td>
        </tr>
     </table>
 </p>
+<div id="validation-warning" style="display:none" class="alert alert-danger">
+  The values you entered do not match your selection.  Please try again, then click "Next".
+</div>
 
     {% next_button %}
+
+<!-- form validation for payout amounts -->
+<script>
+    function Currency(x){return x};
+    var payoffs = {{player.payoffs}};
+
+    $('button.next-button').click(function(event){
+        $('#validation-warning').hide();
+        var selectedPayouts = payoffs[$("input[name='answer']:checked").val()-1]
+        var mismatch = $('#typed-payout-0').val() != selectedPayouts[0] || $('#typed-payout-1').val() != selectedPayouts[1];
+        var bothFilled = $('#typed-payout-0').val() && $('#typed-payout-1').val();
+        if (mismatch && bothFilled) {
+            event.preventDefault();
+            $('#validation-warning').show();
+        }
+    });
+</script>
 
 {% endblock %}
