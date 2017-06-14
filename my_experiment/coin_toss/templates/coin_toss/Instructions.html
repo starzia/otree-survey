@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+
+<p>On the next screen you will be given 8 different options. Each option offers 2 different amounts of money that you
+    can win by choosing that option. You will be asked to choose one of the options. At the end of the experiment the
+    computer will randomly pick one of the outcomes for the option that you have chosen and you will be paid
+    accordingly. For example, if you choose an option that offers outcomes $1.00 and $2.00, then you receive $1.00 with
+    probability 50% and $2.00 with probability 50%. Hence, which of the 2 outcomes you receive depends exclusively on
+    luck.
+</p>
+
+    {% next_button %}
+
+{% endblock %}

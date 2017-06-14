@@ -124,10 +124,14 @@ class Group(BaseGroup):
     def set_payoffs(self):
         for p in self.get_players():
             opponent = self.get_player_by_role("row" if p.role() == "column" else "column")
-            p.theoretical_payoff = c(p.payoffs()
-                                     [p.choices().index(p.matrix_answer)]  # player's choice
-                                     [opponent.choices().index(opponent.matrix_answer)]  # opponent's choice
-                                     [0])  # player's payout
+            try:
+                p.theoretical_payoff = c(p.payoffs()
+                                         [p.choices().index(p.matrix_answer)]  # player's choice
+                                         [opponent.choices().index(opponent.matrix_answer)]  # opponent's choice
+                                         [0])  # player's payout
+            except ValueError:
+                # if we "Advanced slowest user" then choices will be missing, so there is no payout
+                p.theoretical_payoff = 0
             p.payoff = p.theoretical_payoff if self.money_round == self.round_number else c(0);
 
 

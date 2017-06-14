@@ -4,22 +4,19 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class MyPage(Page):
+class Instructions(Page):
     pass
 
 
-class ResultsWaitPage(WaitPage):
+class Question(Page):
+    form_model = models.Player
+    form_fields = ['answer']
 
-    def after_all_players_arrive(self):
-        pass
-
-
-class Results(Page):
-    pass
+    def before_next_page(self):
+        self.player.flip_coin()
 
 
 page_sequence = [
-    MyPage,
-    ResultsWaitPage,
-    Results
+    Instructions,
+    Question
 ]

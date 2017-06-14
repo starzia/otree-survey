@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block content %}
+
+<p>Below this text you will find the 8 available options. To see how to read this table, consider option 5. In this
+    option the possible results are {{player.payoffs.4.0}} and {{player.payoffs.4.1}}. Both are equally likely,
+    which means that the computer will choose {{player.payoffs.4.0}} as the payment half the time and
+    {{player.payoffs.4.1}} the other half.</p>
+
+<p>You must choose one of the 8 possible options.</p>
+
+<p>
+    {{ form.0.errors }}
+    <table>
+        <tr><td></td><td>Probability 50%</td><td>Probability 50%</td></tr>
+        {% for payoff in player.payoffs %}
+        <tr>
+            <td><input id="row{{forloop.counter}}" type="radio" name="answer" value="{{forloop.counter}}" required></td>
+            <td class="border"><label for="row{{forloop.counter}}">{{payoff.0}}</label></td>
+            <td class="border"><label for="row{{forloop.counter}}">{{payoff.1}}</label></td>
+            </label>
+        </tr>
+        {% endfor %}
+    </table>
+</p>
+
+    {% next_button %}
+
+{% endblock %}
