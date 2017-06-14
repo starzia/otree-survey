@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Guess 2/3 of the average
+{% endblock %}
+
+{% block content %}
+
+<p>In this part, the money you can earn depends on your choice and the choice of all other participants.
+    We will ask you to choose a number between 0 and 100.
+    The computer will then calculate the average of the numbers chosen by all participants in this session.
+    The participant whose chosen number is closest to 2/3 times the average of all chosen numbers will win
+    {{player.max_payoff}} and the rest will receive $0.  In case of a tie, multiple players may win.
+
+    {% formfield player.answer with label="Please choose a number between 0 and 100." %}
+
+    {% next_button %}
+
+{% endblock %}
