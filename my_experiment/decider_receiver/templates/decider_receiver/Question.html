@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block content %}
+
+<p>Please select your preferred outcome from the options below by clicking appropriate box underneath and by entering the
+    payments that you and the other participant receive under this outcome in the boxes on the right.</p>
+
+<p>
+    {{ form.0.errors }}
+    <table>
+        <tr><td>You&nbsp;receive:<br/>Other&nbsp;receives:<br/>&nbsp;</td>
+        {% for payoff in player.payoffs %}
+            <td class="border">
+            <label for="row{{forloop.counter}}">{{payoff.0}}</label>
+            <br/><label for="row{{forloop.counter}}">{{payoff.1}}</label>
+            <br/><input id="row{{forloop.counter}}" type="radio" name="answer" value="{{forloop.counter}}" required>
+            </td>
+        {% endfor %}
+       </tr>
+    </table>
+</p>
+
+    {% next_button %}
+
+{% endblock %}

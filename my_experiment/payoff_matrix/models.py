@@ -2,9 +2,7 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
-from random import sample
-
-
+from common import group_players_and_set_money_round
 author = 'Your name here'
 
 doc = """
@@ -91,31 +89,7 @@ def column_payoffs(payoffs):
 
 class Subsession(BaseSubsession):
     def before_session_starts(self):
-        # group players
-        if self.round_number == 1:
-            shuffled_players = sample(self.get_players(), len(self.get_players()))
-            list_of_lists = []
-            for i, p in enumerate(shuffled_players):
-                # the last player has to be in a group of three if he's the odd man out
-                if i == len(shuffled_players) - 1 and i % 2 == 0:
-                    list_of_lists[-1].append(p)
-                # everyone else
-                elif i % 2 == 0:
-                    # start a new group
-                    list_of_lists.append([p])
-                else:
-                    # add to prior group
-                    list_of_lists[-1].append(p)
-            self.set_group_matrix(list_of_lists)
-        else:
-            self.group_like_round(1)
-
-        # choose money round for each group
-        for g in self.get_groups():
-            if self.round_number == 1:
-                g.money_round = 1 + sample(range(Constants.num_rounds), 1)[0]
-            else:
-                g.money_round = g.in_round(1).money_round
+        group_players_and_set_money_round(self, Constants.num_rounds)
 
 
 class Group(BaseGroup):
