@@ -26,4 +26,9 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    gender = models.CharField(
+        widget=widgets.RadioSelect(),
+        choices=["Male", "Female", "Other"],
+        verbose_name="With which gender do you most closely identify?"
+    )
+    age = models.PositiveIntegerField(verbose_name="How old are you?")
