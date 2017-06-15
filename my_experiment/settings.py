@@ -120,7 +120,7 @@ for high_payment in [False, True]:
             'app_sequence': ['instructions1', 'payoff_matrix',  # part 1
                    'coin_toss', 'decider_receiver_instructions', 'decider_receiver', 'two_thirds',  # part 2
                    'personality_test', 'national_survey_instructions', 'national_survey', 'iq_test',  # part 3
-                   'demographics'],
+                   'demographics', 'results'],
             'high_payment': high_payment,
             'social_cues': social_cues,
             'participation_fee': 35.00 if high_payment else 20.00

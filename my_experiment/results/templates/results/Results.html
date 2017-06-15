@@ -1,0 +1,59 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+<p>Thank you for participating in the experiment!.</p>
+
+<p>You started by earning {{player.session.config.participation_fee}} just for participating.</p>
+
+<p>The computer selected the following matrix for payment:</p>
+
+{% with player.participant.vars.matrix as matrix %}
+    {% with player.participant.vars.matrix_choices as matrix_choices %}
+
+<div class="center">
+    <table>
+        <tr>
+            <td></td><td></td><td colspan="2">Other Participant</td>
+        </tr>
+        <tr>
+            <td></td><td></td><td>{{matrix_choices.0}}</td><td>{{matrix_choices.1}}</td>
+        </tr>
+        <tr>
+            <td>You</td><td>{{matrix_choices.0}}︎</td>
+            <td class="border">
+                {{matrix.0.0.0}}, {{matrix.0.0.1}}
+            </td>
+            <td class="border">
+                {{matrix.0.1.0}}, {{matrix.0.1.1}}
+            </td>
+        </tr>
+        <tr>
+            <td></td><td>{{matrix_choices.1}}</td>
+            <td class="border">
+                {{matrix.1.0.0}}, {{matrix.1.0.1}}
+            </td>
+            <td class="border">
+                {{matrix.1.1.0}}, {{matrix.1.1.1}}
+            </td>
+        </tr>
+    </table>
+</div>
+    {% endwith %}
+{% endwith %}
+
+{% with player.participant.vars.matrix_answers as matrix_answers %}
+    <p>You chose {{matrix_answers.0}} and the other participant chose {{matrix_answers.1}},
+        so you earned {{player.participant.vars.matrix_payout}}.</p>
+{% endwith %}
+
+<p>Your total earnings are {{player.participant.payoff_plus_participation_fee}}.</p>
+
+    {% next_button %}
+{% endblock %}
+
+

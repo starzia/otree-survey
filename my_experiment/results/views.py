@@ -4,15 +4,10 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class Questions(Page):
-    form_model = models.Player
-    form_fields = ['gender', 'age']
-
-
 class Results(Page):
     pass
 
 
 page_sequence = [
-    Questions
+    Results
 ]

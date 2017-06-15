@@ -6,7 +6,9 @@ from .models import Constants
 
 class Question(Page):
     form_model = models.Player
-    form_fields = ['matrix_answer', 'social_cues_answer']
+
+    def get_form_fields(self):
+        return ['matrix_answer'] + (['social_cues_answer'] if self.player.show_social_cues() else [])
 
     def matrix_answer_choices(self):
         return self.player.choices()

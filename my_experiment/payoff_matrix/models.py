@@ -107,6 +107,11 @@ class Group(BaseGroup):
                 # if we "Advanced slowest user" then choices will be missing, so there is no payout
                 p.theoretical_payoff = 0
             p.payoff = p.theoretical_payoff if self.money_round == self.round_number else c(0);
+            if self.money_round == self.round_number:
+                p.participant.vars["matrix_payout"] = p.payoff
+                p.participant.vars["matrix_choices"] = p.choices()
+                p.participant.vars["matrix"] = p.payoffs()
+                p.participant.vars["matrix_answers"] = [p.matrix_answer, opponent.matrix_answer]
 
 
 class Player(BasePlayer):
