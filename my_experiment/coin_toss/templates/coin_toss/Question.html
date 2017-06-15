@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<p>Below this text you will find the 8 available options. To see how to read this table, consider option 5. In this
+<p>Below this text you will find the eight options. To see how to read this table, consider option 5. In this
     option the possible results are {{player.payoffs.4.0}} and {{player.payoffs.4.1}}. Both are equally likely,
     which means that the computer will choose {{player.payoffs.4.0}} as the payment half the time and
     {{player.payoffs.4.1}} the other half.</p>
@@ -13,12 +13,17 @@
 <p>
     {{ form.0.errors }}
     <table>
-        <tr><td></td><td>Probability 50%</td><td>Probability 50%</td></tr>
+        <tr><td></td><td>&nbsp;&nbsp;50% Probability&nbsp;&nbsp;</td><td>&nbsp;&nbsp;50% Probability&nbsp;&nbsp;</td></tr>
         {% for payoff in player.payoffs %}
-        <tr>
-            <td><input id="row{{forloop.counter}}" type="radio" name="answer" value="{{forloop.counter}}" required></td>
-            <td class="border"><label for="row{{forloop.counter}}">{{payoff.0}}</label></td>
-            <td class="border"><label for="row{{forloop.counter}}">{{payoff.1}}</label></td>
+        <tr class="border">
+            <td>
+                <label for="row{{forloop.counter}}">
+                    {{forloop.counter}}
+                    <input id="row{{forloop.counter}}" type="radio" name="answer" value="{{forloop.counter}}" required>
+                </label>
+            </td>
+            <td><label for="row{{forloop.counter}}">{{payoff.0}}</label></td>
+            <td><label for="row{{forloop.counter}}">{{payoff.1}}</label></td>
         </tr>
         {% endfor %}
     </table>

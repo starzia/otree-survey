@@ -50,3 +50,8 @@ class Player(BasePlayer):
     def flip_coin(self):
         self.coin_toss = random.randint(1, 2)
         self.payoff = self.payoffs()[self.answer-1][self.coin_toss-1]
+        self.participant.vars["coin_payoff"] = self.payoff
+        self.participant.vars["coin_payoff_possibilities"] = self.payoffs()[self.answer-1]
+        self.participant.vars["coin_random_column"] = self.coin_toss
+        self.participant.vars["coin_answer"] = self.answer
+

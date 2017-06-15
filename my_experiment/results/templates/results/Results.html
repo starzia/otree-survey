@@ -10,6 +10,8 @@
 
 <p>You started by earning {{player.session.config.participation_fee}} just for participating.</p>
 
+<hr>
+
 <p>The computer selected the following matrix for payment:</p>
 
 {% with player.participant.vars.matrix as matrix %}
@@ -50,6 +52,21 @@
     <p>You chose {{matrix_answers.0}} and the other participant chose {{matrix_answers.1}},
         so you earned {{player.participant.vars.matrix_payout}}.</p>
 {% endwith %}
+
+<hr>
+
+<p>In the "50% Probability" question you chose option {{player.participant.vars.coin_answer}}
+    which had the following payoffs:</p>
+<div class="center">
+    <table><tr>
+        {% for i in player.participant.vars.coin_payoff_possibilities %}
+        <td class="border" style="padding:5px">{{i}}</td>
+        {% endfor %}
+    </tr></table>
+</div></div>
+
+<p>The computer randomly chose column {{player.participant.vars.coin_random_column}},
+    so you earned {{player.participant.vars.coin_payoff}}.</p>
 
 <p>Your total earnings are {{player.participant.payoff_plus_participation_fee}}.</p>
 
