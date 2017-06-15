@@ -1,10 +1,13 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 
+{% block title %}
+    Round {{ player.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
 
 {% block content %}
 
-<p>Please select your preferred outcome from the options below by clicking appropriate box underneath and by entering the
+<p>Please select your preferred outcome from the options below by clicking appropriate box and by entering the
     payments that you and the other participant receive under this outcome in the boxes on the right.</p>
 
 <p>

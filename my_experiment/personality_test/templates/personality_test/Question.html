@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Question {{ player.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+
+<p>Please answer the question below. You will make your selection on a 4-point scale to indicate how strongly a
+    statement applies or does not apply to you.</p>
+
+    <div class="form-group required">
+            <label class="control-label"
+                   for="id_answer">{{player.question}}
+            </label>
+            <div class="controls  field-answer">
+                <label class="radio-inline" for="id_answer_1">
+                    <input type="radio" id="id_answer_1" value="1" name="answer" required>
+                    1&mdash;Definitely Disagree
+                </label>
+                <label class="radio-inline" for="id_answer_2">
+                    <input type="radio" id="id_answer_2" value="2" name="answer" required>
+                    2&mdash;Slightly Disagree
+                </label>
+                <label class="radio-inline" for="id_answer_3">
+                    <input type="radio" id="id_answer_3" value="3" name="answer" required>
+                    3&mdash;Slightly Agree
+                </label>
+                <label class="radio-inline" for="id_answer_4">
+                    <input type="radio" id="id_answer_4" value="4" name="answer" required>
+                    4&mdash;Definitely Agree
+                </label>
+            </div><!--- .controls -->
+        </div><!--- .form-group -->
+
+    {% next_button %}
+
+{% endblock %}
