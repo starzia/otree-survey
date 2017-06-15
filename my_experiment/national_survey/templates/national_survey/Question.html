@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Question {{ player.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+        <div class="form-group required center">
+            <label class="control-label"
+                   for="id_answer">
+                {{player.question.0}}
+            </label>
+            <p><b>A:</b> {{player.question.1}} &nbsp; <b>B:</b> {{player.question.2}}</p>
+            <div class="controls field-answer">
+                <table>
+                    <tr>
+                    {% for choice in player.choices %}
+                        <td class="border" style="padding: 5px;">
+                            <label style="font-weight:normal" for="id_answer_{{choice.id}}">
+                                {{choice.label}}
+                            </label>
+                            <br/><input type="radio" id="id_answer_{{choice.id}}" value="{{choice.id}}" name="answer" required>
+                        </td>
+                    {% endfor %}
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    {% next_button %}
+
+{% endblock %}

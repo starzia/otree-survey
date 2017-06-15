@@ -6,14 +6,7 @@ from .models import Constants
 
 class Question(Page):
     form_model = models.Player
-    form_fields = ['submitted_answer']
-
-    def submitted_answer_choices(self):
-        qd = self.player.current_question()
-        return [
-            qd['a'][0],
-            qd['a'][1]
-        ]
+    form_fields = ['answer']
 
 
 class Results(Page):

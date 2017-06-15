@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+<p>Next we will present you questions asked in a series of national American surveys in recent years.
+    Some are fact-based questions.  Some are opinion-based questions.
+    For each question, you will be asked to respond to a question asking you to pick between two options, A & B.
+    You will make your selection on a 7-point scale to indicate your preference for option A or B.
+    The responses of previous participants in a previous survey will be visible to you next to each option,
+    but you can feel free to ignore this information.  Specifically, the percentage of previous participants that
+    prefer a particular option will be listed in parentheses next to each one
+    (if percentages don't add up to 100 it is because there was a no-response or another option available).</p>
+    {% next_button %}
+{% endblock %}
+
+
