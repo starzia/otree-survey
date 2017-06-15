@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load staticfiles %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Question {{ player.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+
+<div class="center">
+    {% with player.round_number|stringformat:"s" as round_id %}
+        {% with "iq_test/question"|add:round_id|add:'.png' as image_src %}
+            <img style="width:100%; max-width:700px" src="{% static image_src %}"/> 
+        {% endwith %}
+    {% endwith %}
+</div>
+<br/>
+    {% formfield player.answer %}
+
+    {% next_button %}
+
+{% endblock %}

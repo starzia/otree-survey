@@ -14,7 +14,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'iq_test'
     players_per_group = None
-    num_rounds = 1
+    num_rounds = 5
 
 
 class Subsession(BaseSubsession):
@@ -26,4 +26,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    answer = models.PositiveIntegerField(
+        widget=widgets.Select(),
+        choices=range(1,9),
+        verbose_name="Select the option that best fits in the array above."
+    )
