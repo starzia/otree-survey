@@ -14,7 +14,7 @@ They are optionally shown a priming "social cue" question beforehand.
 class Constants(BaseConstants):
     name_in_url = 'payoff_matrix'
     players_per_group = None
-    shapes = ['■︎','●','▲','★','▬']
+    shapes = ['■','●','▲','★','▬']
     shape_names = ['square', 'circle', 'triangle', 'star', 'rectangle']
     choices = [
         [0,2],
