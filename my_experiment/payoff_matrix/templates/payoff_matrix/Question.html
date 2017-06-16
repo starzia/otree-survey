@@ -17,10 +17,10 @@
             <td></td><td></td><td colspan="2">Other Participant</td>
         </tr>
         <tr>
-            <td></td><td></td><td>{{player.choices.0}}</td><td>{{player.choices.1}}</td>
+            <td></td><td></td><td>{{player.choice_images.0|safe}}</td><td>{{player.choice_images.1|safe}}</td>
         </tr>
         <tr>
-            <td>You</td><td>{{player.choices.0}}︎</td>
+            <td rowspan="2">You&nbsp;</td><td>{{player.choice_images.0|safe}}︎</td>
             <td class="border">
                 {{player.payoffs.0.0.0}}, {{player.payoffs.0.0.1}}
             </td>
@@ -29,7 +29,7 @@
             </td>
         </tr>
         <tr>
-            <td></td><td>{{player.choices.1}}</td>
+            <td>{{player.choice_images.1|safe}}</td>
             <td class="border">
                 {{player.payoffs.1.0.0}}, {{player.payoffs.1.0.1}}
             </td>
@@ -40,12 +40,26 @@
     </table>
 </div>
 
-<p>You and anothor participant can choose between two symbols, {{player.choices.0}} and {{player.choices.1}}.
-{{player.description}}
+<p>You and another participant can choose between two symbols, {{player.choices.0}} and {{player.choices.1}}.
+{{player.description | safe}}
 </p>
 
 <div class="center">
-    {% formfield player.matrix_answer label="Please choose one of the symbols:" %}
+    <div class="form-group required">
+        <label class="control-label" for="id_matrix_answer">
+            Please choose one of the symbols:
+        </label>
+        <div class="controls  field-matrix_answer">
+            <label class="radio-inline" for="id_matrix_answer_1"><input type="radio" id="id_matrix_answer_1" value="▬"
+                                                                        name="matrix_answer" required="">
+                {{player.choice_images.0|safe}}
+            </label>
+            <label class="radio-inline" for="id_matrix_answer_2"><input type="radio" id="id_matrix_answer_2" value="●"
+                                                                        name="matrix_answer" required="">
+                {{player.choice_images.1|safe}}
+            </label>
+        </div><!--- .controls -->
+    </div>
 </div>
 
     {% next_button %}

@@ -123,6 +123,9 @@ class Player(BasePlayer):
     def choices(self):
         return [Constants.shapes[i] for i in Constants.choices[self.round_number-1]]
 
+    def choice_images(self):
+        return ["<img style='vertical-align:bottom; height:22px' src='/static/payoff_matrix/shape%d.png'>" % i for i in Constants.choices[self.round_number-1]]
+
     def payoffs(self):
         payoffs = Constants.payoffs[self.round_number-1]
         payoffs = double_payoffs(payoffs) if self.session.config["high_payment"] else payoffs
@@ -156,5 +159,5 @@ class Player(BasePlayer):
             if isinstance(s, list):
                 dereferenced.append(payoffs[s[0]][s[1]][s[2]])
             else:  # dereference shapes
-                dereferenced.append(self.choices()[s])
+                dereferenced.append(self.choice_images()[s])
         return format_string % tuple(dereferenced)
