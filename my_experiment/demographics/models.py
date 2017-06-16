@@ -4,10 +4,10 @@ from otree.api import (
 )
 
 
-author = 'Your name here'
+author = 'Kellogg School of Management'
 
 doc = """
-Your app description
+Gender and age question.
 """
 
 

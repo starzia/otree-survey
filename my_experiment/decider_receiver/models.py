@@ -5,7 +5,7 @@ from otree.api import (
 from common import group_players_and_set_money_round
 
 
-author = 'Your name here'
+author = 'Kellogg School of Management'
 
 doc = """
 Your app description

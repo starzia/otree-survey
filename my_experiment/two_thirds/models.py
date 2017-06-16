@@ -4,10 +4,10 @@ from otree.api import (
 )
 
 
-author = 'Your name here'
+author = 'Kellogg School of Management'
 
 doc = """
-Your app description
+Participants try to guess two-thirds of the average of all guesses.
 """
 
 

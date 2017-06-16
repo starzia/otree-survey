@@ -3,10 +3,11 @@ from otree.api import (
     Currency as c, currency_range
 )
 from common import group_players_and_set_money_round
-author = 'Your name here'
+author = 'Kellogg School of Management'
 
 doc = """
-Your app description
+Participants are paired and presented with a game-theory payoff matrix.
+They are optionally shown a priming "social cue" question beforehand.
 """
 
 

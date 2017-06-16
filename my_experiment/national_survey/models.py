@@ -7,7 +7,7 @@ from otree.api import (
 author = 'Kellogg School of Management'
 
 doc = """
-A quiz app for binary-choice questions with a 7-point Likery scale response.
+Participants agree or disagree with six survey question results using a 7-point Likert scale response.
 """
 
 
