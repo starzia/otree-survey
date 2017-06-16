@@ -6,7 +6,9 @@ from .models import Constants
 
 class Question(Page):
     form_model = models.Player
-    form_fields = ['answer',]
+    form_fields = ['answer']
+    # on timeout, choose a value in the middle so as not to skew the average.
+    timeout_submission = {'answer':50}
 
 
 class ResultsWaitPage(WaitPage):

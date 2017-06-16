@@ -1,12 +1,11 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 
-{% block title %}
-    Results
-{% endblock %}
-
 {% block content %}
-<p>Thank you for participating in the experiment!.</p>
+<h3>Thank you for participating in the experiment!</h3>
+<h3>Your earned a total of {{player.participant.payoff_plus_participation_fee}}.</h3>
+
+<hr>
 
 <p>You started by earning {{player.session.config.participation_fee}} just for participating.</p>
 
@@ -99,8 +98,14 @@
 
 <hr>
 
-<p>Your total earnings are {{player.participant.payoff_plus_participation_fee}}.</p>
+<p>In the "2/3 of the average" game, you guessed {{player.participant.vars.twothirds_answer}}
+  and the average guess was {{player.participant.vars.twothirds_average | floatformat:2}}.
 
+<p>2/3 of the average was {{player.participant.vars.twothirds_twothirds | floatformat:2}}
+  and your guess {% if player.participant.vars.twothirds_won %}was{% else %}was not{% endif %}
+  closest, so you earned {{player.participant.vars.twothirds_payoff}}.</p>
+
+<hr>
     {% next_button %}
 {% endblock %}
 

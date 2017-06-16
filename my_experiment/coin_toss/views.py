@@ -11,6 +11,7 @@ class Instructions(Page):
 class Question(Page):
     form_model = models.Player
     form_fields = ['answer']
+    timeout_submission = {'answer': 1}
 
     def before_next_page(self):
         self.player.flip_coin()

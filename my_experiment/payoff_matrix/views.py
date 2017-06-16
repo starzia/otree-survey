@@ -10,6 +10,11 @@ class Question(Page):
     def get_form_fields(self):
         return ['matrix_answer'] + (['social_cues_answer'] if self.player.show_social_cues() else [])
 
+    # if a player times out, then force them to make a legitimate choice so that their partner is not penalized.
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.player.matrix_answer = self.player.choices()[0]
+
     def matrix_answer_choices(self):
         return self.player.choices()
 

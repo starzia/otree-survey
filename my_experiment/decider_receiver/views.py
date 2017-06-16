@@ -7,6 +7,7 @@ from .models import Constants
 class Question(Page):
     form_model = models.Player
     form_fields = ['answer']
+    timeout_submission = {'answer': 1}
 
 
 class ResultsWaitPage(WaitPage):
