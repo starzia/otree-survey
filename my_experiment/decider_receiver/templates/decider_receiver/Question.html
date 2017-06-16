@@ -11,11 +11,12 @@
     payments that you and the other participant receive under this outcome in the boxes on the right.</p>
 
 <p>
+    <div class="center">
     {{ form.0.errors }}
     <table>
         <tr><td>You&nbsp;receive:<br/>Other&nbsp;receives:<br/>&nbsp;</td>
         {% for payoff in player.payoffs %}
-            <td class="border">
+            <td class="border" style="padding:3px">
             <label for="row{{forloop.counter}}">{{payoff.0}}</label>
             <br/><label for="row{{forloop.counter}}">{{payoff.1}}</label>
             <br/><input id="row{{forloop.counter}}" type="radio" name="answer" value="{{forloop.counter}}" required>
@@ -28,6 +29,7 @@
             </td>
        </tr>
     </table>
+    </div>
 </p>
 <div id="validation-warning" style="display:none" class="alert alert-danger">
   The values you entered do not match your selection.  Please try again, then click "Next".

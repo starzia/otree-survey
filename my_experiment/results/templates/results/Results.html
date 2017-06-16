@@ -80,10 +80,10 @@
                 <br/><em>Receiver</em>&nbsp;receives:
             </td>
         {% for payoff in player.participant.vars.decider_choices %}
-            <td class="border"
+            <td class="border" style="padding:3px;
                 {% if forloop.counter == player.participant.vars.decider_decider_answer %}
-                style="background:#bbb"
-                {% endif %}>
+                background:#bbb
+                {% endif %}">
                 {{payoff.0}}
                 <br/>{{payoff.1}}
             </td>

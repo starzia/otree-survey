@@ -112,9 +112,8 @@ class Group(BaseGroup):
                 p.participant.vars["matrix_payout"] = p.payoff
                 p.participant.vars["matrix_choices"] = p.choice_images()
                 p.participant.vars["matrix"] = p.payoffs()
-                p.participant.vars["matrix_answers"] = [p.matrix_answer, opponent.matrix_answer]
-                print([p.choices().index(s) for s in [p.matrix_answer, opponent.matrix_answer]])
-                #    [image_for_shape(p.choices().index(s)) for s in [p.matrix_answer, opponent.matrix_answer]]
+                p.participant.vars["matrix_answers"] = [image_for_shape(Constants.shapes.index(s))
+                                                        for s in [p.matrix_answer, opponent.matrix_answer]]
 
 
 def image_for_shape(idx):

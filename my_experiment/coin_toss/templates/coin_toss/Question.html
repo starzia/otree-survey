@@ -11,12 +11,13 @@
 <p>You must choose one of the 8 possible options.</p>
 
 <p>
+    <div class="center">
     {{ form.0.errors }}
     <table>
         <tr><td></td><td>&nbsp;&nbsp;50% Probability&nbsp;&nbsp;</td><td>&nbsp;&nbsp;50% Probability&nbsp;&nbsp;</td></tr>
         {% for payoff in player.payoffs %}
         <tr class="border">
-            <td>
+            <td style="padding:5px">
                 <label for="row{{forloop.counter}}">
                     {{forloop.counter}}
                     <input id="row{{forloop.counter}}" type="radio" name="answer" value="{{forloop.counter}}" required>
@@ -27,6 +28,7 @@
         </tr>
         {% endfor %}
     </table>
+    </div>
 </p>
 
     {% next_button %}
