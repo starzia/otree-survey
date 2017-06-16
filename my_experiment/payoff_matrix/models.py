@@ -110,9 +110,15 @@ class Group(BaseGroup):
             p.payoff = p.theoretical_payoff if self.money_round == self.round_number else c(0);
             if self.money_round == self.round_number:
                 p.participant.vars["matrix_payout"] = p.payoff
-                p.participant.vars["matrix_choices"] = p.choices()
+                p.participant.vars["matrix_choices"] = p.choice_images()
                 p.participant.vars["matrix"] = p.payoffs()
                 p.participant.vars["matrix_answers"] = [p.matrix_answer, opponent.matrix_answer]
+                print([p.choices().index(s) for s in [p.matrix_answer, opponent.matrix_answer]])
+                #    [image_for_shape(p.choices().index(s)) for s in [p.matrix_answer, opponent.matrix_answer]]
+
+
+def image_for_shape(idx):
+    return "<img style='vertical-align:bottom; height:22px' src='/static/payoff_matrix/shape%d.png'>" % (idx+1)
 
 
 class Player(BasePlayer):
@@ -124,7 +130,7 @@ class Player(BasePlayer):
         return [Constants.shapes[i] for i in Constants.choices[self.round_number-1]]
 
     def choice_images(self):
-        return ["<img style='vertical-align:bottom; height:22px' src='/static/payoff_matrix/shape%d.png'>" % i for i in Constants.choices[self.round_number-1]]
+        return [image_for_shape(i) for i in Constants.choices[self.round_number-1]]
 
     def payoffs(self):
         payoffs = Constants.payoffs[self.round_number-1]
@@ -137,11 +143,13 @@ class Player(BasePlayer):
     def social_cues(self):
         cues = Constants.social_cues[self.round_number-1]
         return [
-            Constants.shapes[cues[0]],
+            image_for_shape(cues[0]),
             Constants.shape_names[cues[0]],
             Constants.shape_names[cues[1]],
             Constants.shapes[cues[0]],
-            Constants.shapes[cues[1]]
+            Constants.shapes[cues[1]],
+            image_for_shape(cues[0]),
+            image_for_shape(cues[1])
         ]
 
     def social_cues_question(self):

@@ -10,30 +10,32 @@
 <p>In this part of the experiment you will be presented with payoff matrices such as the one shown below:</p>
 
 <div class="center">
+    <p>
     <table>
         <tr>
             <td></td><td></td><td colspan="2">Other Participant</td>
         </tr>
         <tr>
-            <td></td><td></td><td>■︎</td><td>●</td>
+            <td></td><td></td><td>{{player.shape.0|safe}}︎</td><td>{{player.shape.1|safe}}</td>
         </tr>
         <tr>
-            <td>You</td><td>■︎</td><td class="border">1, 2</td><td class="border">3, 4</td>
+            <td rowspan="2">You</td><td>{{player.shape.0|safe}}︎</td><td class="border">1, 2</td><td class="border">3, 4</td>
         </tr>
         <tr>
-            <td></td><td>●</td><td class="border">5, 6</td><td class="border">7, 8</td>
+            <td>{{player.shape.1|safe}}</td><td class="border">5, 6</td><td class="border">7, 8</td>
         </tr>
     </table>
+    </p>
 </div>
 
-<p>In this particular matrix, you and another participant can choose between two options, ■︎︎︎ and ●, such that your money
-will depend on your choice as well as on the choice of the other participant. If you both choose ■︎ then you will
-earn $1 and the other participant will earn $2. If you choose ■︎ and the other participant chooses ●, then you will
-earn $3 and the other participant will earn $4. If you choose ● and the other participant chooses ■︎, then you will
-earn $5 and the other participant will earn $6. Finally, if you both choose ● then you will earn $7 and the other
+<p>In this particular matrix, you and another participant can choose between two options, {{player.shape.0|safe}}︎︎︎ and {{player.shape.1|safe}}, such that your money
+will depend on your choice as well as on the choice of the other participant. If you both choose {{player.shape.0|safe}}︎ then you will
+earn $1 and the other participant will earn $2. If you choose {{player.shape.0|safe}}︎ and the other participant chooses {{player.shape.1|safe}}, then you will
+earn $3 and the other participant will earn $4. If you choose {{player.shape.1|safe}} and the other participant chooses {{player.shape.0|safe}}︎, then you will
+earn $5 and the other participant will earn $6. Finally, if you both choose {{player.shape.1|safe}} then you will earn $7 and the other
     participant will get $8.</p>
 
-<p>This is just an example for you to learn how to read a matrix. Are there any questions?</p>
+<p>This is just an example for you to learn how to read a matrix. Raise your hand if you have a question.</p>
 
 <p>You will be presented with 5 different matrices and in each of them you will have to choose between two options.
     The numbers and therefore the money you can earn will change from matrix to matrix, and the matrices will be
@@ -45,18 +47,20 @@ earn $5 and the other participant will earn $6. Finally, if you both choose ● 
 {% if player.social_cues %}
 <p>Right on top of each of the matrices you will find a question such as:</p>
 <div class="center">
-    <p style="font-size:300%; margin:0">●</p>
+    <p>
+        <img style="vertical-align:bottom; height:40px" src="/static/payoff_matrix/shape2.png">
+    </p>
     <div class="form-group">
         <label class="control-label">Is this a circle or a square?</label>
         <div class="controls  field-social_cues_answer">
             <label class="radio-inline" for="id_social_cues_answer_1"><input type="radio" id="id_social_cues_answer_1"
-                                                                             value="●" name="social_cues_answer"> ●</label>
+                                                                             name="social_cues_answer"> {{player.shape.1|safe}}</label>
             <label class="radio-inline" for="id_social_cues_answer_2"><input type="radio" id="id_social_cues_answer_2"
-                                                                             value="■︎" name="social_cues_answer"> ■︎</label>
+                                                                             name="social_cues_answer"> {{player.shape.0|safe}}︎</label>
         </div>
     </div>
 </div>
-<p>You will not be able to submit your choice (● or ■︎) for the matrix unless you click on the right answer.
+<p>You will not be able to submit your choice ({{player.shape.1|safe}} or {{player.shape.0|safe}}︎) for the matrix unless you click on the right answer.
     All of you will see exactly the same question and matrix.</p>
 {% endif %}
 

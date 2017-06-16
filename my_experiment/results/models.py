@@ -26,5 +26,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    def matrix_payout(self):
-        return self.participant.vars['matrix_payout']
+    pass

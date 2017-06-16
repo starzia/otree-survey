@@ -22,10 +22,10 @@
             <td></td><td></td><td colspan="2">Other Participant</td>
         </tr>
         <tr>
-            <td></td><td></td><td>{{matrix_choices.0}}</td><td>{{matrix_choices.1}}</td>
+            <td></td><td></td><td>{{matrix_choices.0|safe}}</td><td>{{matrix_choices.1|safe}}</td>
         </tr>
         <tr>
-            <td rowspan="2">You&nbsp;</td><td>{{matrix_choices.0}}︎</td>
+            <td rowspan="2">You&nbsp;</td><td>{{matrix_choices.0|safe}}︎</td>
             <td class="border">
                 {{matrix.0.0.0}}, {{matrix.0.0.1}}
             </td>
@@ -34,7 +34,7 @@
             </td>
         </tr>
         <tr>
-            <td>{{matrix_choices.1}}</td>
+            <td>{{matrix_choices.1|safe}}</td>
             <td class="border">
                 {{matrix.1.0.0}}, {{matrix.1.0.1}}
             </td>
@@ -48,7 +48,7 @@
 {% endwith %}
 
 {% with player.participant.vars.matrix_answers as matrix_answers %}
-    <p>You chose {{matrix_answers.0}} and the other participant chose {{matrix_answers.1}},
+    <p>You chose {{matrix_answers.0|safe}} and the other participant chose {{matrix_answers.1|safe}},
         so you earned {{player.participant.vars.matrix_payout}}.</p>
 {% endwith %}
 
