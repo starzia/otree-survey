@@ -12,7 +12,7 @@
 
 <hr>
 
-<p>The computer selected the following matrix for payment:</p>
+<p>In the "Shapes" game, the computer selected the following matrix for payment:</p>
 
 {% with player.participant.vars.matrix as matrix %}
     {% with player.participant.vars.matrix_choices as matrix_choices %}
@@ -55,8 +55,8 @@
 
 <hr>
 
-<p>In the "50% Probability" question you chose option {{player.participant.vars.coin_answer}}
-    which had the following payoffs:</p>
+<p>In the "50% Probability" game you chose option {{player.participant.vars.coin_answer}},
+    which had two possible payoffs:</p>
 <div class="center">
     <table><tr>
         {% for i in player.participant.vars.coin_payoff_possibilities %}
@@ -67,6 +67,37 @@
 
 <p>The computer randomly chose column {{player.participant.vars.coin_random_column}},
     so you earned {{player.participant.vars.coin_payoff}}.</p>
+
+<hr>
+
+<p>In the "Decider/Receiver" game, the computer selected scenario
+    {{player.participant.vars.decider_money_round}} for payment:</p>
+
+<div class="center">
+    <table>
+        <tr>
+            <td>
+                <em>Decider</em>&nbsp;receives:
+                <br/><em>Receiver</em>&nbsp;receives:
+            </td>
+        {% for payoff in player.participant.vars.decider_choices %}
+            <td class="border"
+                {% if forloop.counter == player.participant.vars.decider_decider_answer %}
+                style="background:#bbb"
+                {% endif %}>
+                {{payoff.0}}
+                <br/>{{payoff.1}}
+            </td>
+        {% endfor %}
+       </tr>
+    </table>
+</div>
+
+<p>The computer selected the role of "{{player.participant.vars.decider_role | capfirst}}" for you,
+  and {% if player.participant.vars.decider_role == "decider" %}you{% else %}your opponent{% endif %}
+  chose the option shaded above, so you earned {{player.participant.vars.decider_payoff}}.</p>
+
+<hr>
 
 <p>Your total earnings are {{player.participant.payoff_plus_participation_fee}}.</p>
 

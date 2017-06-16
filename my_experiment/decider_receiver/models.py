@@ -108,7 +108,13 @@ class Group(BaseGroup):
             except ValueError:
                 # if we "Advanced slowest user" then choices will be missing, so there is no payout
                 p.theoretical_payoff = 0
-            p.payoff = p.theoretical_payoff if self.money_round == self.round_number else c(0);
+            if self.money_round == self.round_number:
+                p.payoff = p.theoretical_payoff
+                p.participant.vars['decider_payoff'] = p.payoff
+                p.participant.vars['decider_money_round'] = self.money_round
+                p.participant.vars['decider_choices'] = p.payoffs()
+                p.participant.vars['decider_role'] = p.role()
+                p.participant.vars['decider_decider_answer'] = (p.answer if p.role() == "decider" else opponent.answer)
 
 
 class Player(BasePlayer):
