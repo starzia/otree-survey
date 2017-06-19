@@ -1,12 +1,22 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 
+{% block title %}
+50% Probability
+{% endblock %}
+
 {% block content %}
 
-<p>Below this text you will find the eight options. To see how to read this table, consider option 5. In this
+<p>Below this text you will find the eight options.  Each option offers 2 different amounts of money that you
+    can win by choosing that option. Please choose one of the options. At the end of the experiment the
+    computer will randomly pick one of the two payouts for the option you have chosen and you will be paid
+    accordingly.
+</p>
+
+<p>To see how to read this table, consider option 5. In this
     option the possible results are {{player.payoffs.4.0}} and {{player.payoffs.4.1}}. Both are equally likely,
     which means that the computer will choose {{player.payoffs.4.0}} as the payment half the time and
-    {{player.payoffs.4.1}} the other half.</p>
+    {{player.payoffs.4.1}} the other half.   Which of these two outcomes you receive depends exclusively on luck.</p>
 
 <p>You must choose one of the 8 possible options.</p>
 
