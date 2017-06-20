@@ -17,10 +17,10 @@ class Constants(BaseConstants):
     shapes = ['■','●','▲','★','▬']
     shape_names = ['square', 'circle', 'triangle', 'star', 'rectangle']
     choices = [
-        [0,2],
+        [2,0],
         [4,1],
         [2,3],
-        [1,4],
+        [4,1],
         [3,0]
     ]
     payoffs = [
@@ -37,8 +37,8 @@ class Constants(BaseConstants):
             [[0,0],[20,22]]
         ],
         [
-            [[22,22],[0,2]],
-            [[2,0],[10,10]]
+            [[10,10],[2,0]],
+            [[0,2],[22,22]]
         ],
         [
             [[22,20],[0,0]],

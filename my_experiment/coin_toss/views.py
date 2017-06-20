@@ -18,5 +18,6 @@ class Question(Page):
 
 
 page_sequence = [
+    Instructions,
     Question
 ]

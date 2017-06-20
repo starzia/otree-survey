@@ -101,12 +101,22 @@
 <p>In the "2/3 of the average" game, you guessed {{player.participant.vars.twothirds_answer}}
   and the average guess was {{player.participant.vars.twothirds_average | floatformat:2}}.
 
-<p>2/3 of the average was {{player.participant.vars.twothirds_twothirds | floatformat:2}}
-  and your guess {% if player.participant.vars.twothirds_won %}was{% else %}was not{% endif %}
-  closest, so you earned {{player.participant.vars.twothirds_payoff}}.</p>
+<p>2/3 of the average was {{player.participant.vars.twothirds_twothirds | floatformat:2}
+  and your guess
+    {% if player.participant.vars.twothirds_won %}
+      was closest.
+      {% if player.participant.vars.twothirds_num_winners == 1 %}
+         You were the only winner,
+      {% else %}
+         The reward was split among {{player.participant.vars.twothirds_num_winners}} tied participants,
+      {% endif %}
+    {% else %}
+      was not closest,
+    {% endif %}
+    so you earned {{player.participant.vars.twothirds_payoff}}.
+  closest., </p>
 
 <hr>
-    {% next_button %}
 {% endblock %}
 
 

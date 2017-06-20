@@ -2,7 +2,7 @@
 {% load staticfiles otree_tags %}
 
 {% block title %}
-    Guess 2/3 of the average
+    Part 2(c): Guess 2/3 of the average
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,8 @@
     We will ask you to choose a number between 0 and 100.
     The computer will then calculate the average of the numbers chosen by all participants in this session.
     The participant whose chosen number is closest to 2/3 times the average of all chosen numbers will win
-    {{player.max_payoff}} and the rest will receive $0.  In case of a tie, multiple players may win.
+    {{player.max_payoff}} and the rest will receive $0.  In case of a tie, the {{player.max_payoff}}
+    will be split among the winners.
 
     {% formfield player.answer with label="Please choose a number between 0 and 100." %}
 
