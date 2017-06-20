@@ -1,9 +1,10 @@
-from random import sample
+from random import sample, shuffle
 
 def group_players_and_set_money_round(subsession, num_rounds):
     # group players
     if subsession.round_number == 1:
-        shuffled_players = sample(subsession.get_players(), len(subsession.get_players()))
+        shuffled_players = subsession.get_players()
+        shuffle(shuffled_players)
         list_of_lists = []
         for i, p in enumerate(shuffled_players):
             # the last player has to be in a group of three if he's the odd man out
