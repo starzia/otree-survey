@@ -12,6 +12,9 @@ class Question(Page):
 
 
 class ResultsWaitPage(WaitPage):
+    title_text = "Please wait"
+    body_text = "Waiting for all the other participants to answer."
+
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 

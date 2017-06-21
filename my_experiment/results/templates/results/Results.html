@@ -2,9 +2,14 @@
 {% load staticfiles otree_tags %}
 
 {% block content %}
+<div class="jumbotron">
 <h3>Thank you for participating in the experiment!</h3>
-<h3>Your earned a total of {{player.participant.payoff_plus_participation_fee}}.</h3>
+<p class="lead">You earned a total of <b><big>{{player.participant.payoff_plus_participation_fee}}</big></b>.
+To claim it, please tell the proctor that you were <b><big>participant&nbsp;number&nbsp;{{player.participant.id_in_session}}</big></b></p>
+</p>
+</div>
 
+<h4>If you're curious, here are the details of your payout:</h4>
 <hr>
 
 <p>You started by earning {{player.session.config.participation_fee}} just for participating.</p>
@@ -101,7 +106,7 @@
 <p>In the "2/3 of the average" game, you guessed {{player.participant.vars.twothirds_answer}}
   and the average guess was {{player.participant.vars.twothirds_average | floatformat:2}}.
 
-<p>2/3 of the average was {{player.participant.vars.twothirds_twothirds | floatformat:2}
+<p>2/3 of the average was {{player.participant.vars.twothirds_twothirds | floatformat:2}}
   and your guess
     {% if player.participant.vars.twothirds_won %}
       was closest.
@@ -113,10 +118,8 @@
     {% else %}
       was not closest,
     {% endif %}
-    so you earned {{player.participant.vars.twothirds_payoff}}.
-  closest., </p>
+    so you earned {{player.participant.vars.twothirds_payoff}}.</p>
 
-<hr>
 {% endblock %}
 
 

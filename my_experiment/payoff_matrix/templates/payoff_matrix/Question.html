@@ -96,11 +96,16 @@
 
     {% next_button %}
 
+    {% if player.show_social_cues %}
     <!-- form validation for social cues -->
 <script>
     $('button.next-button').click(function(event){
         $('#validation-warning').hide();
         var selectedAnswer = $("input[name='social_cues_answer']:checked").val();
+
+        /* let the bootstrap validation handle no-entry */
+        if (!selectedAnswer) return true;
+
         var correctAnswer = '{{player.social_cues.3}}';
         if (selectedAnswer != correctAnswer) {
             event.preventDefault();
@@ -108,6 +113,7 @@
         }
     });
 </script>
+    {% endif %}
 
 {% endblock %}
 
