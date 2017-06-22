@@ -117,11 +117,10 @@ for high_payment in [False, True]:
                             % ("high" if high_payment else "normal",
                                "with social" if social_cues else "without"),
             'num_demo_participants': 2,
-            'app_sequence': ['instructions1', 'payoff_matrix',  # part 1
-                   'coin_toss', 'decider_receiver_instructions', 'decider_receiver', 'two_thirds',  # part 2
+            'app_sequence': ['payoff_matrix',  # part 1
+                   'coin_toss', 'decider_receiver', 'two_thirds',  # part 2
                    # part 3
-                   'instructions3', 'personality_test', 'national_survey_instructions', 'national_survey',
-                             'iq_test_instructions', 'iq_test',
+                   'personality_test', 'national_survey', 'iq_test',
                    'demographics', 'results'],
             'high_payment': high_payment,
             'social_cues': social_cues,

@@ -168,3 +168,10 @@ class Player(BasePlayer):
             else:  # dereference shapes
                 dereferenced.append(self.choice_images()[s])
         return format_string % tuple(dereferenced)
+
+    def shape(self):
+        return [image_for_shape(i) for i,s in enumerate(Constants.shapes)]
+
+    def participation_fee(self):
+        return self.session.config['participation_fee'];
+
