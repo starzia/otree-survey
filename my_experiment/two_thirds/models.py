@@ -46,6 +46,9 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     answer = models.IntegerField(min=0, max=100)
 
+    # last_one is used to facilitate the WaitPage in the results app.  Remember, that it defaults to None
+    last_one = models.BooleanField()
+
     def max_payoff(self):
         return c(10 if self.session.config["high_payment"] else 5);
 
