@@ -5,6 +5,9 @@ from .models import Constants
 
 
 class TwoThirdsWaitPage(WaitPage):
+    title_text = "Please wait"
+    body_text = "Waiting for all the other participants to submit a guess for the 2/3 game."
+
     # below is a hack to create a channel that we can use to signal completion of the 2/3 game
     group_by_arrival_time = True
 
