@@ -45,12 +45,14 @@ class Constants(BaseConstants):
             [[0,0], [15,17]]
         ],
     ]
+    #
     social_cues = [
-        [2, 3],
-        [1, 2],
-        [3, 1],
-        [4, 3],
-        [0, 2]
+        # the first two are the choices and the third is the prompt
+        [2, 3, 2],
+        [2, 1, 1],
+        [1, 3, 3],
+        [4, 3, 4],
+        [0, 2, 0]
     ]
     descriptions = [
         ("If you both choose the same symbol, you each get $%d. If you choose different symbols, you each get $0.",
@@ -142,13 +144,14 @@ class Player(BasePlayer):
     def social_cues(self):
         cues = Constants.social_cues[self.round_number-1]
         return [
-            image_for_shape(cues[0]),
-            Constants.shape_names[cues[0]],
-            Constants.shape_names[cues[1]],
-            Constants.shapes[cues[0]],
-            Constants.shapes[cues[1]],
-            image_for_shape(cues[0]),
-            image_for_shape(cues[1])
+            image_for_shape(cues[2]),  # prompt image
+            Constants.shape_names[cues[0]],  # first choice name
+            Constants.shape_names[cues[1]],  # second choice name
+            Constants.shapes[cues[0]],  # first choice char
+            Constants.shapes[cues[1]],  # second choice char
+            image_for_shape(cues[0]),  # first choice image
+            image_for_shape(cues[1]),  # second choice image
+            Constants.shapes[cues[2]],  # prompt char
         ]
 
     def social_cues_question(self):

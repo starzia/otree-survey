@@ -12,8 +12,8 @@ RUNNING IT
     $ virtualenv virtualenv
     $ . virtualenv/bin/activate
     $ pip3 install otree-core
-    $ otree startproject oTree
-    $ cd oTree
+    $ otree startproject my_experiment
+    $ cd my_experiment
     $ otree resetdb
     $ otree collectstatic
     $ otree runserver

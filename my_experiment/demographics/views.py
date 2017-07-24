@@ -6,7 +6,7 @@ from .models import Constants
 
 class Questions(Page):
     form_model = models.Player
-    form_fields = ['gender', 'age']
+    form_fields = ['gender', 'age', "education"]
 
 
 class Results(Page):

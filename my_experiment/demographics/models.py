@@ -32,3 +32,14 @@ class Player(BasePlayer):
         verbose_name="With which gender do you most closely identify?"
     )
     age = models.PositiveIntegerField(verbose_name="How old are you?")
+    education = models.CharField(
+        widget=widgets.RadioSelect(),
+        choices=["Less than high school",
+                 "High school graduate (includes equivalency)",
+                 "Some college, no degree",
+                 "Associate's degree",
+                 "Bachelor's degree",
+                 "Ph.D.",
+                 "Graduate or professional degree"],
+        verbose_name="What is the highest degree or level of education you have completed?"
+    )
