@@ -2,7 +2,6 @@ import os
 from os import environ
 
 import dj_database_url
-from boto.mturk import qualification
 
 import otree.settings
 
@@ -22,7 +21,7 @@ ADMIN_USERNAME = 'admin'
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 # don't share this with anybody.
-SECRET_KEY = 'g7bhcpg9=qgyzl$tnz9b=vvbq36+k+_0*8zmh#btnsjn=o!g(v'
+SECRET_KEY = 'j@tcy5+((*z907u#cbg(9x2vm7#eah5q=qldd&7yok#$@zsxn7'
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -57,7 +56,7 @@ AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'USD'
-USE_POINTS = False
+USE_POINTS = True
 
 
 # e.g. en, de, fr, it, ja, zh-hans
@@ -73,12 +72,6 @@ DEMO_PAGE_INTRO_TEXT = """
 oTree games
 """
 
-# from here on are qualifications requirements for workers
-# see description for requirements on Amazon Mechanical Turk website:
-# http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_QualificationRequirementDataStructureArticle.html
-# and also in docs for boto:
-# https://boto.readthedocs.org/en/latest/ref/mturk.html?highlight=mturk#module-boto.mturk.qualification
-
 mturk_hit_settings = {
     'keywords': ['easy', 'bonus', 'choice', 'study'],
     'title': 'Title for your experiment',
@@ -88,12 +81,9 @@ mturk_hit_settings = {
     'minutes_allotted_per_assignment': 60,
     'expiration_hours': 7*24,  # 7 days
     # 'grant_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
-    'qualification_requirements': [
-        # qualification.LocaleRequirement("EqualTo", "US"),
-        # qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
-        # qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5),
-        # qualification.Requirement('YOUR_QUALIFICATION_ID_HERE', 'DoesNotExist')
-    ]
+    # to use qualification requirements, you need to uncomment the 'qualification' import
+    # at the top of this file.
+    'qualification_requirements': [],
 }
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
@@ -102,30 +92,21 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 1.000,
+    'real_world_currency_per_point': 0.000,
     'participation_fee': 0.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
 }
 
-SESSION_CONFIGS = []
-for high_payment in [False, True]:
-    for social_cues in [False, True]:
-        SESSION_CONFIGS.append({
-            'name': 'my_experiment_%d_%d' % (high_payment, social_cues),
-            'display_name': 'My Experiment: %s payment, %s cues'
-                            % ("high" if high_payment else "normal",
-                               "with social" if social_cues else "without"),
-            'num_demo_participants': 2,
-            'app_sequence': ['payoff_matrix',  # part 1
-                   'coin_toss', 'decider_receiver', 'two_thirds',  # part 2
-                   # part 3
-                   'personality_test', 'national_survey', 'iq_test',
-                   'demographics', 'results'],
-            'high_payment': high_payment,
-            'social_cues': social_cues,
-            'participation_fee': 35.00 if high_payment else 20.00
-        })
+
+SESSION_CONFIGS = [
+    # {
+    #     'name': '...',
+    #     'display_name': '...',
+    #     'num_demo_participants': ...,
+    #     'app_sequence': ['...'],
+    # }
+]
 
 # anything you put after the below line will override
 # oTree's default settings. Use with caution.

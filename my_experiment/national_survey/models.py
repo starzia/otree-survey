@@ -7,7 +7,7 @@ from otree.api import (
 author = 'Kellogg School of Management'
 
 doc = """
-Participants agree or disagree with six survey question results using a 7-point Likert scale response.
+Participants agree or disagree with five survey question results using a 7-point Likert scale response.
 """
 
 
@@ -15,10 +15,10 @@ class Constants(BaseConstants):
     name_in_url = 'national_survey'
     players_per_group = None
     questions = [
-        [
-            "Do you think the space station has been a good investment for this country, or don't you think so?",
-            "Good investment (64%)", "Not a good investment (29%)"
-        ],
+        #[
+        #    "Do you think the space station has been a good investment for this country, or don't you think so?",
+        #    "Good investment (64%)", "Not a good investment (29%)"
+        #],
         [
             "Do you have a favorable or unfavorable opinion of Bill Cosby?",
             "Unfavorable (61%)", "Favorable (22%)"
